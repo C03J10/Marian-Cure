@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.gradient {
+  background-image: linear-gradient(to top, #E04B9B, #ffffff00);
+}
+
+.gradientRight {
+  background-image: linear-gradient(to right, #E04B9B, #39c2ef);
+}
+
+body {
+  @apply m-0;
+}
+
+input {
+  @apply border;
+  @apply border-blu-900;
+  @apply bg-white;
+}
+
+input:active{
+  @apply outline;
+  @apply outline-blu-700;
+}
+
+input:focus{
+  @apply outline;
+  @apply outline-blu-700;
+}
+
+.buttonMain {
+  @apply bg-blu-600;
+  @apply rounded-lg;
+}
+
+.buttonMain:hover {
+  @apply bg-blu-500
+}
+
+.buttonMain:active {
+  @apply bg-blu-800
+}
+
+.buttonIcon {
+  @apply text-blu-900;
+}
+
+.buttonIcon:hover {
+  @apply text-blu-500;
+}
+
+.buttonIcon:active {
+  @apply text-blu-800;
+}
