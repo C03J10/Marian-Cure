@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import 'primeicons/primeicons.css'
 
@@ -6,8 +6,8 @@ import logpanel from "assets/logpanel.jpg"
 
 function Login() {
 
-    const [username, setUsername] = useState()
-    const [password, setPassword] = useState()
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
 
     const navigate = useNavigate()
@@ -15,10 +15,9 @@ function Login() {
 
     const handlePasswordVisibility = () => {
         setShowPassword(!showPassword)
-        showPassword? {}:{}
     }
 
-    const auth = () => {
+    const auth = async () => {
         test()
     }
 
@@ -27,7 +26,7 @@ function Login() {
         <>
             <div className='flex bg-white'>
 
-                <div className="relative h-screen w-[50%]">
+                <div className="relative h-screen w-1/2">
 
                     <img className="absolute h-full w-full object-cover object-center" src={logpanel} alt="background" />
 
@@ -35,10 +34,16 @@ function Login() {
 
                     <div className="absolute z-20 h-full w-full gradient"></div>
 
+                    <div className='absolute z-30 h-full w-full flex flex-col items-center justify-center text-white'>
+
+                        <h1 className='text-[3rem] font-itim font-semibold'>mariancure</h1>
+
+                    </div>
+
 
                 </div>
 
-                <div className='w-[50%] h-full flex flex-col items-center justify-center m-auto text-black font-rubik'>
+                <div className='w-1/2 h-full flex flex-col items-center justify-center m-auto text-black font-rubik'>
 
                     <div className='h-full w-3/5 flex flex-col'>
 
@@ -55,8 +60,8 @@ function Login() {
                             <div className="flex flex-col mb-4">
 
                                 <label htmlFor="usernameInput" className='mb-1'>username</label>
-                                <input type="text" id='usernameInput' value={username} onChange={(e) => setUsername(e.target.value)}placeholder='Enter your username' 
-                                className='h-12 w-full rounded-lg px-4 font-normal' />
+                                <input type="text" id='usernameInput' value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Enter your username'
+                                    className='h-12 w-full rounded-lg px-4 font-normal' />
 
                             </div>
 
@@ -66,11 +71,11 @@ function Login() {
 
                                 <div className='flex flex-row h-12 w-full relative'>
 
-                                    <input type={showPassword ? "text" : "password"} id='passwordInput' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password' 
-                                    className='absolute h-12 w-full rounded-lg px-4 font-normal' />
+                                    <input type={showPassword ? "text" : "password"} id='passwordInput' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password'
+                                        className='absolute h-12 w-full rounded-lg px-4 font-normal' />
 
-                                    <button value={showPassword} onClick={handlePasswordVisibility} 
-                                    className={`absolute h-full buttonIcon pi pi-${showPassword? 'eye-slash':'eye'} float-right right-4`}></button>
+                                    <button value={showPassword} onClick={handlePasswordVisibility}
+                                        className={`absolute h-full buttonIcon pi pi-${showPassword ? 'eye-slash' : 'eye'} float-right right-4`}></button>
 
                                 </div>
 
@@ -80,14 +85,9 @@ function Login() {
 
                         </div>
 
-
                     </div>
 
-
-
-
                 </div>
-
 
             </div>
         </>

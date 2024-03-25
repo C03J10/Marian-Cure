@@ -22,6 +22,9 @@
         ],
         "router": [
           "./src/router/*"
+        ],
+        "server": [
+          "./src/server/*"
         ]
       }
     }

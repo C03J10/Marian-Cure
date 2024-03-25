@@ -11,7 +11,8 @@ export default defineConfig({
       components: "/src/components",
       assets: "/src/assets",
       hooks: "/src/hooks",
-      router: "/src/router"
+      router: "/src/router",
+      server: "/src/server"
     },
   },
 })

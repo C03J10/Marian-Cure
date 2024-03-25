@@ -8,6 +8,7 @@ export default {
 
     fontFamily: {
       rubik: ["Rubik", "sans-serif"],
+      itim: ["Itim", "sans-serif"]
     },
 
     extend: {
