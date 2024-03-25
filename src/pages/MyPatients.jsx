@@ -58,7 +58,6 @@ function MyPatients() {
 
       </div>
 
-      <Footer class="w-full h-64 bg-gray-900 static bottom-0 " ></Footer>
     </>
   )
 }
