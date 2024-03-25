@@ -1,9 +1,10 @@
 import React from 'react'
+import Footer from "components/Footer"
 
 function MyPatients() {
   return (
     <>
-      <div className='h-screen w-full flex items-center justify-center gradientRight m-auto'>
+      <div className='h-screen w-full flex items-center justify-center gradientRight m-auto '>
 
         <div className='h-4/5 w-4/5 flex flex-col bg-white text-black p-12 rounded-xl'>
 
@@ -56,6 +57,7 @@ function MyPatients() {
 
 
       </div>
+
     </>
   )
 }

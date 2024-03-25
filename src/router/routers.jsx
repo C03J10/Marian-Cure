@@ -5,6 +5,8 @@ import HomeLayout from "layouts/HomeLayout"
 
 import Login from "pages/Login"
 import MyPatients from "pages/MyPatients"
+import Footer from "components/Footer"
+import Reportform from "pages/Reportform"
 
 function routers() {
 
@@ -24,6 +26,14 @@ function routers() {
         {
           path: "/mypatients",
           element: <MyPatients />
+        },
+        {
+          path:"/footer",
+          element: <Footer/>
+        },
+        {
+          path:"/reportform",
+          element: <Reportform/>
         }
       ]
     }

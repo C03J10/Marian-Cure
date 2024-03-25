@@ -60,8 +60,8 @@ function Login() {
                             <div className="flex flex-col mb-4">
 
                                 <label htmlFor="usernameInput" className='mb-1'>username</label>
-                                <input type="text" id='usernameInput' value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Enter your username'
-                                    className='h-12 w-full rounded-lg px-4 font-normal' />
+                                <input type="text" id='usernameInput' value={username} onChange={(e) => setUsername(e.target.value)}placeholder='Enter your username' 
+                                className='h-12 w-full rounded-lg px-4 font-normal' />
 
                             </div>
 
