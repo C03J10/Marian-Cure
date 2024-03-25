@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom"
 
 import Login from "pages/Login"
 import MyPatients from "pages/MyPatients"
+import Footer from "components/Footer"
 
 function routers() {
 
@@ -18,6 +19,10 @@ function routers() {
     {
       path:"/mypatients",
       element: <MyPatients/>
+    },
+    {
+      path:"/footer",
+      element: <Footer/>
     }
   ])
   return routers
