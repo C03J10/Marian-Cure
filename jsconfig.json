@@ -25,6 +25,9 @@
         ],
         "server": [
           "./src/server/*"
+        ],
+        "data": [
+          "./src/data/*"
         ]
       }
     }

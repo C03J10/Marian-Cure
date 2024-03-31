@@ -1,14 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import 'primeicons/primeicons.css'
 
+import { db } from 'data/database'
+import { AuthContext } from 'hooks/authContext'
 import logpanel from "assets/logpanel.jpg"
+
 
 function Login() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+
+    const { user, login } = useContext(AuthContext);
 
     const navigate = useNavigate()
     const test = () => navigate("/mypatients")
@@ -18,7 +23,51 @@ function Login() {
     }
 
     const auth = async () => {
-        test()
+
+        if (username == '' || password == ''){
+            alert('Please fill out the forms.')
+            return
+        }
+
+        db.user.map((data) => {
+
+            if(data.username == username && data.password == password) {
+                
+                let userData = {
+                    username: data.username,
+                    user_id: data.user_id,
+                    role: 'Patient',
+                    pharmacist_id: 0,
+                    pharmacist_name: ''
+                }
+                
+                db.pharmacist.map((pharmaData) => {
+                    
+
+                    if (pharmaData.user_id == userData.user_id){
+
+                        userData = {
+                            ...userData,
+                            role: 'Pharmacist',
+                            pharmacist_id: pharmaData.pharmacist_id,
+                            pharmacist_name: pharmaData.pharmacist_name
+                        }
+
+                    }
+
+                })
+                login(userData)
+
+                alert(`Hellow ${user.username}`)
+                
+                test()
+                return
+                
+            }
+        }
+        )
+
+        alert('Invalid credentials!')
     }
 
     return (
@@ -54,7 +103,7 @@ function Login() {
                         <p className="mb-9">
                             To proceed, log in with your account.
                         </p>
-
+                        
                         <div className='font-semibold'>
 
                             <div className="flex flex-col mb-4">
