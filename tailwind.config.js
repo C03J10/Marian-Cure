@@ -23,6 +23,7 @@ export default {
       colors: {
         "white": "#fcfdff",
         "pinkie": "#E04B9B",
+        "pinktwo": "#f0a3d1",
         "black": "#040629",
         'blu': {
           '50': '#f1fafe',
