@@ -9,6 +9,7 @@ import Footer from "components/Footer"
 import Reportform from "pages/Reportform"
 import Home from "pages/Home"
 import Review from "pages/Review"
+import Hero from "src/layouts/Hero"
 
 
 function routers() {
@@ -45,7 +46,12 @@ function routers() {
         {
           path:"/review",
           element: <Review/>
+        },
+        {
+          path:"/hero",
+          element: <Hero  />
         }
+      
       ]
     }
   ])
