@@ -12,10 +12,15 @@ function AuthProvider ({ children }) {
   const login = (userData) => {
     setUser(userData);
     setIsLoggedIn(true);
-  };
+  }
+
+  const logout = () => {
+    setUser(null)
+    setIsLoggedIn(false)
+  }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, user, login}}>
+    <AuthContext.Provider value={{ isLoggedIn, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   )

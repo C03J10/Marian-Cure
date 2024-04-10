@@ -16,7 +16,7 @@ function Footer() {
 
         <div className='flex flex-col items-start font-rubik text-white'>
 
-          <h1 className='text-2xl mb-2'>Contact Us</h1>
+          <h1 className='text-[1.5rem] mb-2 font-bold'>Contact Us</h1>
 
           <a href="https://cpc.uic.edu.ph/" target="_blank" rel="noopener noreferrer">
             <span className="pi pi-external-link mr-3"></span>

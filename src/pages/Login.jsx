@@ -143,7 +143,7 @@ return (
 
                         </div>
 
-                        <button onClick={auth} id="loginButton" className='h-12 w-full buttonMain text-white mb-4'>Log In</button>
+                        <button onClick={auth} id="loginButton" className='h-12 w-full buttonMain text-white mb-4 rounded-lg'>Log In</button>
 
                     </div>
 

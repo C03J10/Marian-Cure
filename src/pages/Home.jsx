@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Footer from "components/Footer"
-import doc from 'assets/Logo/doc.png'
+import doctor from 'assets/doctor.png'
 import kit from 'assets/medkit.png'
 import heart from 'assets/heart.png'
 import pharmacist from 'assets/groupic.png'
@@ -11,71 +11,73 @@ import stethoscope from 'assets/stethoscope.png'
 function Home() {
 
   const navigate = useNavigate()
-  const navToSubmitConcern = navigate("/reportform")
+  const navToSubmitConcern = () => navigate("/submitconcern")
 
   return (
 
     <>
-      <div className='w-full h-[10em] relative lg:h-[42em]' id='landhero'>
+      <div className='min-h-auto w-full font-rubik relative' id='landhero'>
 
-        <div className="h-screen w-full flex items-center justify-center gradientRight m-auto" />
+        <div className="h-[36em] w-full flex flex-row items-center gap-24 justify-center gradientRight">
 
-        <img className="flex flex-row h-[50em] w-[40em] top-[-44em] right-[-50em] relative object-cover object-center" src={doc} alt="" />
+          <div className="flex flex-col text-white font-rubik gap-3 ">
 
-        <p className="h-[40em] w-[12em] top-[3.5em] left-[8.3em] absolute object-cover object-center text-[30px] text-white font-rubik ">Welcome to Marian Cure! </p>
-        <p className="h-[40em] w-[12em] top-[2.5em] left-[3.8em] absolute object-cover object-center text-[65px] text-white font-rubik font-bold ">Take care of <br></br>your health is our <br></br>top priority.</p>
-        <button className='rounded-3xl h-12 w-48 top-[31em] absolute buttonMain justify-center items-center flex m-auto text-white mb-4 left-[19em]'>Send us your concern</button>
-
-        <div className='flex-col relative h-[25em] w-[85em] bottom-[55em] left-[5em] flex rounded-2xl bg-white border-[0.1em] border-gray shadow-2xl text-black p-12 '>
-
-          <div className='flex flex-col'>
-            <div className='flex flex-row absolute h-12 rounded-lg w-72 px-4 font-normal top-[6em] left-[10em]'>
-              <img className='flex flex-row h-[7em] w-[7em] top-[-2em] right-[7em] absolute object-cover object-center' src={kit} alt=""></img>
-              <h6 className='flex flex-row font-rubik text-lg text-center top-[6em] left-[-0.3em] font-bold relative'> To streamline <br></br>medication review and <br></br>ensure access to <br></br>needed medications <br></br>while minimizing risks.</h6>
-            </div>
-
-            <div className='flex flex-col absolute h-12 rounded-lg w-72 px-4 font-normal top-[6em] left-[30em]'>
-              <img className="flex flex-row h-[7em] w-[7em] top-[-2em] right-[1em] absolute object-cover object-center" src={stethoscope} alt=""></img>
-
-              <h6 className='flex flex-row font-rubik text-lg text-center top-[6em] left-[5em] font-bold relative'>Monitor medication use,<br></br> adherence, and adverse <br></br>effects to improve <br></br>health outcomes.</h6>
-            </div>
-
-            <div className='flex flex-row absolute h-12 rounded-lg w-72 px-4 font-normal top-[6em] left-[50em]'>
-              <img className="flex flex-row h-[7em] w-[7em] top-[-2em] right-[-6em] absolute object-cover object-center" src={heart} alt=""></img>
-              <h6 className='flex flex-row font-rubik text-lg text-center top-[6em] left-[11.5em] font-bold relative'>Provide personalized<br></br> interventions to <br></br>optimize medication<br></br> regimens and overall<br></br> well-being.</h6>
-            </div>
-          </div>
-
-          <div className='flex flex-col top-[-4em] relative '>
-
-            <div className='flex flex-col relative  h-12 rounded-lg w-[33em] px-4 font-normal top-[30em] left-[-6em]'>
-              <h1 className='flex flex-row text-5xl text-center top-[1em] left-[6.5em] font-bold relative'>Our Mission</h1>
-              <p className='flex flex-row font-rubik text-xl text-center top-[4em] left-[10em] relative'> The Marian Cure system aims to safeguard the health and welfare of University of Immaculate Conception personnel by offering thorough medication management and monitoring services. </p>
-            </div>
-
-            <div className='flex flex-col relative  h-12 rounded-lg w-[33em] px-4 font-normal top-[27em] left-[35em]'>
-              <h1 className='flex flex-row text-5xl text-center top-[1em] left-[6.5em] font-bold relative'>Our Vision</h1>
-              <p className='flex flex-row font-rubik text-xl text-center top-[4em] left-[10em] relative'> The Marian Cure system aims to safeguard the health and welfare of University of Immaculate Conception personnel by offering thorough medication management and monitoring services. </p>
-            </div>
-
-            <div className='flex flex-col top-[-4em] relative '>
-              <p className='flex flex-row  font-rubik text-2xl text-center top-[60em] left-[1em] relative'> The Marian Cure system is a medication therapy review system designed for the personnel of the University of Immaculate Conception. It facilitates the management and monitoring of personnel medications, ensuring efficient tracking and optimization of their healthcare needs. </p>
-              <img className="flex flex-row relative h-[30em] w-[80em] top-[45em] right-[-2em] object-cover object-center" src={pharmacist} alt=""></img>
-            </div>
+            <p className="text-[1.5rem]">Welcome to Marian Cure! </p>
+            <p className="text-[3rem] font-bold leading-[3.5rem] mb-8">Take care of <br></br>your health is our <br></br>top priority.</p>
+            <button onClick={navToSubmitConcern} className='rounded-lg h-12 w-64 buttonMain'>Send us your concern</button>
 
           </div>
 
-          <div className='relative  h-12 rounded-lg w-[33em] px-4 font-normal top-[70em] right-[1em]'>
-            <p className='font-rubik text-3xl text-center w-[5em] top-[70em] right-[33em] relative'> The Marian Cure system aims to safeguard the health and welfare of University of Immaculate Conception personnel by offering thorough medication management and monitoring services. </p>
-          </div>
+          <img className="h-[34em] w-[28em] object-cover object-center" src={doctor} alt="Doctor image" />
 
         </div>
-        
-        <img className="relative h-[30em] w-[80em] top-[55em] right-[-7em] object-cover object-center" src={pharmacist} alt=""></img>
+
+
+        <div className='min-h-auto w-4/5 mx-auto flex flex-col relative gap-24 pb-24 text-black '>
+
+          <div className='flex flex-row inset-0 -top-12 absolute items-center justify-center h-[22em] z-10 gap-12 mx-auto bg-white rounded-xl shadow-xl font-bold border border-gray-400'>
+
+            <div className='flex flex-col items-center justify-start w-[20%] gap-3'>
+              <img className='h-[6em] w-[6em] object-cover object-center' src={kit} alt=""></img>
+              <h6 className='text-[1rem] text-center'> To streamline medication review and ensure access to needed medications while minimizing risks.</h6>
+            </div>
+
+            <div className='flex flex-col items-center justify-start w-[20%] gap-3'>
+              <img className="h-[6em] w-[6em] object-cover object-center" src={stethoscope} alt=""></img>
+              <h6 className='text-[1rem] text-center'>Monitor medication use, adherence, and adverse effects to improve health outcomes.</h6>
+            </div>
+
+            <div className='flex flex-col items-center justify-start w-[20%] gap-3'>
+              <img className="h-[6em] w-[6em] object-cover object-center" src={heart} alt=""></img>
+              <h6 className='text-[1rem] text-center'>Provide personalized interventions to optimize medication regimens and overall well-being.</h6>
+            </div>
+
+          </div>
+          
+          <div className='flex flex-row items-center justify-center relative min-h-auto gap-12 mt-96 mx-auto text-center'>
+
+            <div className='flex flex-col px-4'>
+              <h1 className='text-[3rem] font-bold'>Our Mission</h1>
+              <p className=' text-[1rem]'>The Marian Cure system aims to safeguard the health and welfare of University of Immaculate Conception personnel by offering thorough medication management and monitoring services. </p>
+            </div>
+
+            <div className='flex flex-col px-4'>
+              <h1 className='text-[3rem] font-bold'>Our Vision</h1>
+              <p className='text-[1rem]'>To establish ourselves as a reliable ally in fostering health and wellness, achieved through efficient medication evaluations, educational initiatives, and supportive measures, thereby elevating the general quality of life within the University of Immaculate Conception.</p>
+            </div>
+
+          </div>
+
+          <div className='flex flex-col'>
+            <p className='flex flex-row  font-rubik text-[1.25rem] text-center'> The Marian Cure system is a medication therapy review system designed for the personnel of the University of Immaculate Conception. It facilitates the management and monitoring of personnel medications, ensuring efficient tracking and optimization of their healthcare needs. </p>
+
+          </div>
+
+          <img className="flex flex-row relative h-[30em] w-full object-cover object-center" src={pharmacist} alt=""></img>
+
+        </div>
 
       </div>
-      <img className="relative h-[30em] w-[80em] top-[55em] right-[-7em] object-cover object-center" src={pharmacist} alt=""></img>
-
       <Footer />
     </>
   )
