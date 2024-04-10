@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-function ReportForm({ state }) {
+function ReportForm({ state, isViewed }) {
 
     const [forView, setForView] = useState(true)
     const [fullName, setFullName] = useState('')
@@ -14,7 +14,7 @@ function ReportForm({ state }) {
     const [curMed, setCurMed] = useState('')
 
     useEffect(() => {
-        if (state === "submit") {
+        if (isViewed) {
             setForView(false)
         }
     }, [])

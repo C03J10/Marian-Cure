@@ -32,10 +32,6 @@ function routers() {
           element: <MyPatients />
         },
         {
-          path:"/footer",
-          element: <Footer/>
-        },
-        {
           path:"/reportform",
           element: <Reportform/>
         },

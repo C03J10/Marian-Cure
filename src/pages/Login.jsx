@@ -70,7 +70,7 @@ function Login() {
 
                 })
                 login(userData)
-                navigate('/mypatients')
+                navigate('/home')
                 return
 
             }
@@ -136,14 +136,14 @@ return (
                                 <input type={showPassword ? "text" : "password"} id='passwordInput' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password'
                                     className='absolute h-12 w-full rounded-lg px-4 font-normal' />
 
-                                <button value={showPassword} onClick={handlePasswordVisibility}
+                                <button id='passwordVisibilityButton' value={showPassword} onClick={handlePasswordVisibility}
                                     className={`absolute h-full buttonIcon pi pi-${showPassword ? 'eye-slash' : 'eye'} float-right right-4`}></button>
 
                             </div>
 
                         </div>
 
-                        <button onClick={auth} className='h-12 w-full buttonMain text-white mb-4'>Log In</button>
+                        <button onClick={auth} id="loginButton" className='h-12 w-full buttonMain text-white mb-4'>Log In</button>
 
                     </div>
 

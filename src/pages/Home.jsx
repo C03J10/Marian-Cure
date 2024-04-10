@@ -1,26 +1,30 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import Footer from "components/Footer"
-import Hero from "layouts/Hero"
 import doc from 'assets/Logo/doc.png'
 import kit from 'assets/medkit.png'
 import heart from 'assets/heart.png'
 import pharmacist from 'assets/groupic.png'
 import stethoscope from 'assets/stethoscope.png'
 
-
-
 function Home() {
+
+  const navigate = useNavigate()
+  const navToSubmitConcern = navigate("/reportform")
+
   return (
 
     <>
-      <div className='flex-grow h-screen relative ' id='landhero'>
-        <div className="h-screen w-full flex flex-col items-center justify-center gradientRight m-auto" />
+      <div className='w-full h-[10em] relative lg:h-[42em]' id='landhero'>
+
+        <div className="h-screen w-full flex items-center justify-center gradientRight m-auto" />
 
         <img className="flex flex-row h-[50em] w-[40em] top-[-44em] right-[-50em] relative object-cover object-center" src={doc} alt="" />
 
-        <p className="flex flex-row h-[20em] w-[12em] top-[3.5em] left-[8.3em] absolute object-cover object-center text-[30px] text-white font-rubik ">Welcome to Marian Cure! </p>
-        <p className="flex flex-row h-[20em] w-[12em] top-[2.5em] left-[3.8em] absolute object-cover object-center text-[65px] text-white font-rubik font-bold ">Take care of <br></br>your health is our <br></br>top priority.</p>
-        <button className='flex-row rounded-3xl h-12 w-48 top-[31em] absolute buttonMain justify-center items-center flex m-auto text-white mb-4 left-[19em]'>Send us your concern</button>
+        <p className="h-[40em] w-[12em] top-[3.5em] left-[8.3em] absolute object-cover object-center text-[30px] text-white font-rubik ">Welcome to Marian Cure! </p>
+        <p className="h-[40em] w-[12em] top-[2.5em] left-[3.8em] absolute object-cover object-center text-[65px] text-white font-rubik font-bold ">Take care of <br></br>your health is our <br></br>top priority.</p>
+        <button className='rounded-3xl h-12 w-48 top-[31em] absolute buttonMain justify-center items-center flex m-auto text-white mb-4 left-[19em]'>Send us your concern</button>
 
         <div className='flex-col relative h-[25em] w-[85em] bottom-[55em] left-[5em] flex rounded-2xl bg-white border-[0.1em] border-gray shadow-2xl text-black p-12 '>
 
@@ -61,13 +65,18 @@ function Home() {
 
           </div>
 
-
-
+          <div className='relative  h-12 rounded-lg w-[33em] px-4 font-normal top-[70em] right-[1em]'>
+            <p className='font-rubik text-3xl text-center w-[5em] top-[70em] right-[33em] relative'> The Marian Cure system aims to safeguard the health and welfare of University of Immaculate Conception personnel by offering thorough medication management and monitoring services. </p>
+          </div>
 
         </div>
-      </div>
+        
+        <img className="relative h-[30em] w-[80em] top-[55em] right-[-7em] object-cover object-center" src={pharmacist} alt=""></img>
 
-      <Footer></Footer>
+      </div>
+      <img className="relative h-[30em] w-[80em] top-[55em] right-[-7em] object-cover object-center" src={pharmacist} alt=""></img>
+
+      <Footer />
     </>
   )
 }
