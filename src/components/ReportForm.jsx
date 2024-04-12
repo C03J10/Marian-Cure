@@ -126,7 +126,7 @@ function ReportForm({ state, isViewed }) {
                         </div>
 
                         <input type="text" id='complaintInput' placeholder=''
-                            className='h-[1.3em] w-[3em] px-4 left-[2.5em] relative flex-row flex outline-' />
+                            className='h-[1.3em] w-[3em] px-4 left-[2.5em] relative flex-row flex border-t-0 border-x-0 border-b-12' />
                         <h6 className='px-1 left-[2.5em] relative flex-row flex '> packs per year</h6>
 
                         <div className='flex flex-col relative left-[8em] '>
@@ -151,8 +151,8 @@ function ReportForm({ state, isViewed }) {
                     </div>
 
                     <div className='flex flex-col'>
-                        <label htmlFor="familyhistoryInput" className='font-semibold'>Allergy History</label>
-                        <input type="text" id='familyhistoryInput' placeholder='Input your Family History here'
+                        <label htmlFor="allergyInput" className='font-semibold'>Allergy History</label>
+                        <input type="text" id='allergyInput' placeholder='Input your Family History here'
                             className='h-[10em] rounded-lg w-full px-4' />
                     </div>
 
@@ -193,12 +193,12 @@ function ReportForm({ state, isViewed }) {
                     <div className='flex flex-row'>
                         <div>
                             <input type="text" id='assessmentinput' placeholder='Input your Assessment here'
-                                className='h-[10em]  w-[30em] px-4 rounded-lg '></input>
+                                className='h-[15em]  w-[30em] px-4 rounded-lg '></input>
                         </div>
 
                         <div className='flex flex-col relative left-[4em]'>
                             <input type="text" id='planinput' placeholder='Input your Plan History here'
-                                className='h-[10em] w-[30em] px-4 rounded-lg '></input>
+                                className='h-[15em] w-[30em] px-4 rounded-lg '></input>
                         </div>
                     </div>
 
