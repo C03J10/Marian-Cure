@@ -23,16 +23,17 @@ function routers() {
       element: <Login />
     },
     {
+      path: "/mypatients",
+      element: <MyPatients />
+    },
+    {
       element: <HomeLayout />,
       children: [
         {
           path: "/home",
           element: <Home />
         },
-        {
-          path: "/mypatients",
-          element: <MyPatients />
-        },
+      
         {
           path: "/submitconcern",
           element: <Reportform />

@@ -28,7 +28,7 @@ function ReportForm({ state, isViewed }) {
     }
 
     const submitConcern = async () => {
-        if (fullName === '' || gender === '' || age === '' || contactNumber === '' || weight === '' || height === '' || concern === '' || curMed === ''){
+        if (fullName === '' || gender === '' || age === '' || contactNumber === '' || weight === '' || height === '' || concern === '' || curMed === '') {
             alert("Please fill up the fields first.")
             return
         }
@@ -100,38 +100,116 @@ function ReportForm({ state, isViewed }) {
                 <div className='min-h-auto w-full flex flex-col relative bg-white gap-6'>
 
                     <div className='top-0 flex items-center justify-center bg-pinktwo h-12'>
-                        <h1 className='text-[1.5rem] font-bold'>Concern</h1>
+                        <h1 className='text-[1.5rem] font-bold'>General Information</h1>
+                    </div>
+
+                    <div className='flex flex-row items-center justify-center '>
+                        <div className='flex flex-col relative right-[8em]'>
+                            <label>
+                                <input type="checkbox" id='pregnantinput' />
+                                Pregnant
+                            </label>
+                        </div>
+
+                        <div className='flex flex-col relative right-[3em]'>
+                            <label>
+                                <input type="checkbox" id='breastfeedinginput' />
+                                Breastfeeding
+                            </label>
+                        </div>
+
+                        <div className='flex flex-col relative left-[2em] '>
+                            <label>
+                                <input type="checkbox" id='smokinginput' />
+                                Smoking
+                            </label>
+                        </div>
+
+                        <input type="text" id='complaintInput' placeholder=''
+                            className='h-[1.3em] w-[3em] px-4 left-[2.5em] relative flex-row flex border-t-0 border-x-0 border-b-12' />
+                        <h6 className='px-1 left-[2.5em] relative flex-row flex '> packs per year</h6>
+
+                        <div className='flex flex-col relative left-[8em] '>
+                            <label>
+                                <input type="checkbox" id='alcoholicinput' />
+                                Alcoholic
+                            </label>
+                        </div>
                     </div>
 
 
-                    <div className='flex flex-col'>
-                        <label htmlFor="concernInput" className='font-semibold'>Concern</label>
-                        <input type="text" id='concernInput' placeholder='Input your concern here' disabled={forView} value={concern} onChange={(e) => setConcern(e.target.value)}
+                    <div className='flex flex-col '>
+                        <label htmlFor="complaintInput" className='font-semibold'>Chief Complaint</label>
+                        <input type="text" id='complaintInput' placeholder='Input your Complaint here'
                             className='h-[10em] rounded-lg w-full px-4' />
                     </div>
 
-                </div>
+                    <div className='flex flex-col'>
+                        <label htmlFor="familyhistoryInput" className='font-semibold'>Family History</label>
+                        <input type="text" id='familyhistoryInput' placeholder='Input your Family History here'
+                            className='h-[10em] rounded-lg w-full px-4' />
+                    </div>
 
-                <div className='min-h-auto w-full flex flex-col relative bg-white gap-6'>
+                    <div className='flex flex-col'>
+                        <label htmlFor="allergyInput" className='font-semibold'>Allergy History</label>
+                        <input type="text" id='allergyInput' placeholder='Input your Family History here'
+                            className='h-[10em] rounded-lg w-full px-4' />
+                    </div>
+
+
+                    <div className='min-h-auto w-full flex flex-col relative bg-white gap-6'>
 
                     <div className='top-0 flex items-center justify-center bg-pinktwo h-12'>
-                        <h1 className='text-[1.5rem] font-bold'>Medication</h1>
+                        <h1 className='text-[1.5rem] font-bold'>Medication History</h1>
                     </div>
 
-
                     <div className='flex flex-col'>
-                        <label htmlFor="prevMedInput" className='font-semibold'>Previous Medication (Optional)</label>
-                        <input type="text" id='prevMedInput' placeholder='Input your concern here' disabled={forView} value={prevMed} onChange={(e) => setPrevMed(e.target.value)}
+                        <label htmlFor="previousmedInput" className='font-semibold'>Previous Medication (Optional)</label>
+                        <input type="text" id='previousmedInput' placeholder='Input your Family History here'
                             className='h-[10em] rounded-lg w-full px-4' />
                     </div>
 
                     <div className='flex flex-col'>
-                        <label htmlFor="curMedInput" className='font-semibold'>Current Medication</label>
-                        <input type="text" id='curMedInput' placeholder='Input your concern here' disabled={forView} value={curMed} onChange={(e) => setCurMed(e.target.value)}
+                        <label htmlFor="currentmedInput" className='font-semibold'>Current Medication</label>
+                        <input type="text" id='currentmedInput' placeholder='Input your Family History here'
                             className='h-[10em] rounded-lg w-full px-4' />
                     </div>
+
+                    </div>
+
+
+
+                    <div className='flex flex-row '>
+                        <div className='top-0 flex items-center justify-center bg-pinktwo h-12 w-[30em] relative '>
+                            <h1 className='text-[1.5rem] font-bold'>Assessment</h1>
+                        </div>
+
+                        <div className='top-0 flex items-center justify-center bg-pinktwo h-12 w-[30em] relative left-[4em]    '>
+                            <h1 className='text-[1.5rem] font-bold '>Plan</h1>
+                        </div>
+                    </div>
+
+
+                    <div className='flex flex-row'>
+                        <div>
+                            <input type="text" id='assessmentinput' placeholder='Input your Assessment here'
+                                className='h-[15em]  w-[30em] px-4 rounded-lg '></input>
+                        </div>
+
+                        <div className='flex flex-col relative left-[4em]'>
+                            <input type="text" id='planinput' placeholder='Input your Plan History here'
+                                className='h-[15em] w-[30em] px-4 rounded-lg '></input>
+                        </div>
+                    </div>
+
+
+
+
 
                 </div>
+
+
+
 
                 {addButtons()}
 
