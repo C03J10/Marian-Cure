@@ -126,14 +126,14 @@ function ReportForm({ state, isViewed }) {
                         </div>
 
                         <input type="text" id='complaintInput' placeholder=''
-                                className='h-[1.3em] w-[3em] px-4 left-[2.5em] relative flex-row flex outline-' />
-                                <h6  className='px-1 left-[2.5em] relative flex-row flex '> packs per year</h6>
+                            className='h-[1.3em] w-[3em] px-4 left-[2.5em] relative flex-row flex outline-' />
+                        <h6 className='px-1 left-[2.5em] relative flex-row flex '> packs per year</h6>
 
                         <div className='flex flex-col relative left-[8em] '>
-                        <label>
-                            <input type="checkbox" id='alcoholicinput' />
-                            Alcoholic
-                        </label>
+                            <label>
+                                <input type="checkbox" id='alcoholicinput' />
+                                Alcoholic
+                            </label>
                         </div>
                     </div>
 
@@ -150,27 +150,33 @@ function ReportForm({ state, isViewed }) {
                             className='h-[10em] rounded-lg w-full px-4' />
                     </div>
 
-                    <div className='flex flex-row '>
-                        <div className='top-0 flex items-center justify-center bg-pinktwo h-12 w-[30em] relative'>
-                            <h1 className='text-[1.5rem] font-bold'>Allergy History</h1>
-                        </div>
-
-                        <div className='top-0 flex items-center justify-center bg-pinktwo h-12 w-[30em] relative left-[4em]   '>
-                            <h1 className='text-[1.5rem] font-bold'>Medication History</h1>
-                        </div>
+                    <div className='flex flex-col'>
+                        <label htmlFor="familyhistoryInput" className='font-semibold'>Allergy History</label>
+                        <input type="text" id='familyhistoryInput' placeholder='Input your Family History here'
+                            className='h-[10em] rounded-lg w-full px-4' />
                     </div>
 
-                    <div className='flex flex-row relative'>
-                        <div className='flex flex-col relative'>
-                            <input type="text" id='allergyinput' placeholder='Input your Allergy History here'
-                                className='h-[10em] rounded-lg w-[30em] px-4'></input>
-                        </div>
 
-                        <div className='flex flex-col relative left-[4em]'>
-                            <input type="text" id='medicationinput' placeholder='Input your Medication History here'
-                                className='h-[10em] rounded-lg w-[30em] px-4 left'></input>
-                        </div>
+                    <div className='min-h-auto w-full flex flex-col relative bg-white gap-6'>
+
+                    <div className='top-0 flex items-center justify-center bg-pinktwo h-12'>
+                        <h1 className='text-[1.5rem] font-bold'>Medication History</h1>
                     </div>
+
+                    <div className='flex flex-col'>
+                        <label htmlFor="previousmedInput" className='font-semibold'>Previous Medication (Optional)</label>
+                        <input type="text" id='previousmedInput' placeholder='Input your Family History here'
+                            className='h-[10em] rounded-lg w-full px-4' />
+                    </div>
+
+                    <div className='flex flex-col'>
+                        <label htmlFor="currentmedInput" className='font-semibold'>Current Medication</label>
+                        <input type="text" id='currentmedInput' placeholder='Input your Family History here'
+                            className='h-[10em] rounded-lg w-full px-4' />
+                    </div>
+
+                    </div>
+
 
 
                     <div className='flex flex-row '>
