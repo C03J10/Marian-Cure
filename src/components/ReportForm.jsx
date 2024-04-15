@@ -3,15 +3,28 @@ import React, { useState, useEffect } from 'react'
 function ReportForm({ state, isViewed }) {
 
     const [forView, setForView] = useState(true)
+
     const [fullName, setFullName] = useState('')
     const [gender, setGender] = useState('')
     const [age, setAge] = useState('')
     const [contactNumber, setContactNumber] = useState('')
     const [weight, setWeight] = useState('')
     const [height, setHeight] = useState('')
-    const [concern, setConcern] = useState('')
+
+    const [isPregnant, setIsPregnant] = useState(false)
+    const [doesBreastfeed, setDoesBreastfeed] = useState(false)
+    const [doesDrinkAlcohol, setDoesDrinkAlcohol] = useState(false)
+    const [doesSmoke, setDoesSmoke] = useState(false)
+    const [packs, setPacks] = useState('')
+
+    const [chiefComplaint, setChiefComplaint] = useState('')
+    const [familyHistory, setFamilyHistory] = useState('')
+    const [allergyHistory, setAllergyHistory] = useState('')
     const [prevMed, setPrevMed] = useState('')
     const [curMed, setCurMed] = useState('')
+
+    const [assessment, setAssessment ] = useState('')
+    const [plan, setPlan] = useState('')
 
     useEffect(() => {
         if (isViewed) {
@@ -67,7 +80,7 @@ function ReportForm({ state, isViewed }) {
 
                         <div className='w-1/4 flex flex-col'>
                             <label htmlFor="ageInput" className='font-semibold'>Age</label>
-                            <input type="number" id='ageInput' placeholder='Age' disabled={forView} value={age} onChange={(e) => setAge(e.target.value)}
+                            <input type="number" id='ageInput' placeholder='Age' min="0" disabled={forView} value={age} onChange={(e) => setAge(e.target.value)}
                                 className='h-12 rounded-lg w-full px-4' />
                         </div>
 
@@ -83,81 +96,76 @@ function ReportForm({ state, isViewed }) {
 
                         <div className='w-1/4 flex flex-col'>
                             <label htmlFor="weightInput" className='font-semibold'>Weight(kg)</label>
-                            <input type="number" id='weightInput' placeholder='Weight' step="any" disabled={forView} value={weight} onChange={(e) => setWeight(e.target.value)}
+                            <input type="number" id='weightInput' placeholder='Weight' step="any" min="0" disabled={forView} value={weight} onChange={(e) => setWeight(e.target.value)}
                                 className='h-12 rounded-lg w-full px-4' />
                         </div>
 
                         <div className='w-1/4 flex flex-col'>
                             <label htmlFor="heightInput" className='font-semibold'>Height(cm)</label>
-                            <input type="number" id='heightInput' placeholder='Height' step="any" disabled={forView} value={height} onChange={(e) => setHeight(e.target.value)}
+                            <input type="number" id='heightInput' placeholder='Height' step="any" min="0" disabled={forView} value={height} onChange={(e) => setHeight(e.target.value)}
                                 className='h-12 rounded-lg w-full px-4' />
                         </div>
 
                     </div>
 
-                </div>
-
-                <div className='min-h-auto w-full flex flex-col relative bg-white gap-6'>
 
                     <div className='top-0 flex items-center justify-center bg-pinktwo h-12'>
                         <h1 className='text-[1.5rem] font-bold'>General Information</h1>
                     </div>
 
-                    <div className='flex flex-row items-center justify-center '>
-                        <div className='flex flex-col relative right-[8em]'>
-                            <label>
-                                <input type="checkbox" id='pregnantinput' />
-                                Pregnant
-                            </label>
+                    <div className='flex flex-row items-center justify-center gap-9 '>
+
+                        <div className='flex gap-3'>
+                            <input type="checkbox" id='pregnantInput' value={isPregnant} />
+                            <label htmlFor='pregnantInput'>Pregnant</label>
                         </div>
 
-                        <div className='flex flex-col relative right-[3em]'>
-                            <label>
-                                <input type="checkbox" id='breastfeedinginput' />
-                                Breastfeeding
-                            </label>
+                        <div className='flex gap-3'>
+                            <input type="checkbox" id='breastfeedingInput' value={doesBreastfeed} />
+                            <label htmlFor='breastfeedingInput'>Breastfeeding</label>
                         </div>
 
-                        <div className='flex flex-col relative left-[2em] '>
-                            <label>
-                                <input type="checkbox" id='smokinginput' />
-                                Smoking
-                            </label>
+
+                        <div className='flex gap-3'>
+
+                            <input type="checkbox" id='smokingInput' value={doesSmoke} />
+                            <label htmlFor="smokingInput">Smoking</label>
+
+                            <div className='flex gap-1'>
+                                <input type="number" id='complaintInput' min="0" value={packs} onChange={(e) => setPacks(e.target.value)} className='h-5 w-12 border-t-0 border-x-0 border-b-12' />
+                                <h6 className='left-[2.5em] '> packs/year</h6>
+                            </div>
+
                         </div>
 
-                        <input type="text" id='complaintInput' placeholder=''
-                            className='h-[1.3em] w-[3em] px-4 left-[2.5em] relative flex-row flex border-t-0 border-x-0 border-b-12' />
-                        <h6 className='px-1 left-[2.5em] relative flex-row flex '> packs per year</h6>
-
-                        <div className='flex flex-col relative left-[8em] '>
-                            <label>
-                                <input type="checkbox" id='alcoholicinput' />
-                                Alcoholic
-                            </label>
+                        <div className='flex gap-3'>
+                            <input type="checkbox" id='alcoholicInput' value={doesDrinkAlcohol} />
+                            <label htmlFor='alcoholicInput'>Alcoholic</label>
                         </div>
+
                     </div>
-
 
                     <div className='flex flex-col '>
                         <label htmlFor="complaintInput" className='font-semibold'>Chief Complaint</label>
-                        <input type="text" id='complaintInput' placeholder='Input your Complaint here'
-                            className='h-[10em] rounded-lg w-full px-4' />
+                        <textarea type="text" id='complaintInput' placeholder='Input your Complaint here'
+                            value={chiefComplaint} onChange={(e) => setChiefComplaint(e.target.value)}
+                            className='h-[8em] rounded-lg w-full p-4' />
                     </div>
 
                     <div className='flex flex-col'>
                         <label htmlFor="familyhistoryInput" className='font-semibold'>Family History</label>
-                        <input type="text" id='familyhistoryInput' placeholder='Input your Family History here'
-                            className='h-[10em] rounded-lg w-full px-4' />
+                        <textarea type="text" id='familyhistoryInput' placeholder='Input your Family History here'
+                            value={familyHistory} onChange={(e) => setFamilyHistory(e.target.value)}
+                            className='h-[8em] rounded-lg w-full p-4' />
                     </div>
 
                     <div className='flex flex-col'>
                         <label htmlFor="allergyInput" className='font-semibold'>Allergy History</label>
-                        <input type="text" id='allergyInput' placeholder='Input your Family History here'
-                            className='h-[10em] rounded-lg w-full px-4' />
+                        <textarea type="text" id='allergyInput' placeholder='Input your Family History here'
+                            value={allergyHistory} onChange={(e) => setAllergyHistory(e.target.value)}
+                            className='h-[8em] rounded-lg w-full p-4' />
                     </div>
 
-
-                    <div className='min-h-auto w-full flex flex-col relative bg-white gap-6'>
 
                     <div className='top-0 flex items-center justify-center bg-pinktwo h-12'>
                         <h1 className='text-[1.5rem] font-bold'>Medication History</h1>
@@ -165,51 +173,46 @@ function ReportForm({ state, isViewed }) {
 
                     <div className='flex flex-col'>
                         <label htmlFor="previousmedInput" className='font-semibold'>Previous Medication (Optional)</label>
-                        <input type="text" id='previousmedInput' placeholder='Input your Family History here'
-                            className='h-[10em] rounded-lg w-full px-4' />
+                        <textarea type="text" id='previousmedInput' placeholder='Input your Family History here'
+                            value={prevMed} onChange={(e) => setPrevMed(e.target.value)}
+                            className='h-[8em] rounded-lg w-full p-4' />
                     </div>
 
                     <div className='flex flex-col'>
                         <label htmlFor="currentmedInput" className='font-semibold'>Current Medication</label>
-                        <input type="text" id='currentmedInput' placeholder='Input your Family History here'
-                            className='h-[10em] rounded-lg w-full px-4' />
+                        <textarea type="text" id='currentmedInput' placeholder='Input your Family History here'
+                            value={curMed} onChange={(e) => setCurMed(e.target.value)}
+                            className='h-[8em] rounded-lg w-full p-4' />
                     </div>
 
+                    <div className='flex flex-row gap-6'>
+
+                        <div className='flex flex-col w-full gap-6'>
+
+                            <div className='top-0 flex items-center justify-center bg-pinktwo h-12 w-full'>
+                                <h1 className='text-[1.5rem] font-bold'>Assessment</h1>
+                            </div>
+
+                            <textarea type="text" id='assessmentinput' placeholder='Input your Assessment here'
+                                value={assessment} onChange={(e) => setAssessment(e.target.value)}
+                                className='h-[15em] w-full p-4 rounded-lg '/>
+
+                        </div>
+
+                        <div className='flex flex-col w-full gap-6'>
+
+                            <div className='top-0 flex items-center justify-center bg-pinktwo h-12 w-full'>
+                                <h1 className='text-[1.5rem] font-bold '>Plan</h1>
+                            </div>
+
+                            <textarea type="text" id='planinput' placeholder='Input your Plan History here'
+                                value={plan} onChange={(e) => setPlan(e.target.value)}
+                                className='h-[15em] w-full p-4 rounded-lg '/>
+                        </div>
+
                     </div>
-
-
-
-                    <div className='flex flex-row '>
-                        <div className='top-0 flex items-center justify-center bg-pinktwo h-12 w-[30em] relative '>
-                            <h1 className='text-[1.5rem] font-bold'>Assessment</h1>
-                        </div>
-
-                        <div className='top-0 flex items-center justify-center bg-pinktwo h-12 w-[30em] relative left-[4em]    '>
-                            <h1 className='text-[1.5rem] font-bold '>Plan</h1>
-                        </div>
-                    </div>
-
-
-                    <div className='flex flex-row'>
-                        <div>
-                            <input type="text" id='assessmentinput' placeholder='Input your Assessment here'
-                                className='h-[15em]  w-[30em] px-4 rounded-lg '></input>
-                        </div>
-
-                        <div className='flex flex-col relative left-[4em]'>
-                            <input type="text" id='planinput' placeholder='Input your Plan History here'
-                                className='h-[15em] w-[30em] px-4 rounded-lg '></input>
-                        </div>
-                    </div>
-
-
-
-
 
                 </div>
-
-
-
 
                 {addButtons()}
 

@@ -1,7 +1,10 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect, useContext } from 'react'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 
 import Footer from "components/Footer"
+import { AuthContext } from 'hooks/authContext'
+import { getConcern } from 'server/fetch'
+
 import doctor from 'assets/doctor.png'
 import kit from 'assets/medkit.png'
 import heart from 'assets/heart.png'
@@ -10,8 +13,77 @@ import stethoscope from 'assets/stethoscope.png'
 
 function Home() {
 
+  const [userState, setUserState] = useState('')
+  const [buttonText, setButtonText] = useState('')
+
   const navigate = useNavigate()
   const navToSubmitConcern = () => navigate("/submitconcern")
+  const navToViewConcern = () => navigate("/viewconcern")
+  const navToMyPatients = () => navigate("/mypatients")
+
+  let userData = JSON.parse(sessionStorage.getItem('user'))
+
+  const handleState = async () => {
+    if(userData.pharmacist_id != null){
+      setUserState(3)
+      return
+    }
+
+    const response = await getConcern(userData.user_id);
+
+    if (response.status===200){
+      setUserState(2)
+      return
+
+    }else {
+      setUserState(1)
+      return
+    }
+
+  }
+
+  const handleButtonText = () => {
+
+    if (userState == 1) {
+      setButtonText('Send us your concern')
+      return
+    }
+
+    if (userState == 2) {
+      setButtonText('View concern')
+      return
+    }
+
+    if (userState == 3) {
+      setButtonText('View patients')
+      return
+    }
+
+  }
+
+  const handleButtonFunction = () => {
+
+    if (userState == 1) {
+      navToSubmitConcern()
+      return
+    }
+
+    if (userState == 2) {
+      navToViewConcern()
+      return
+    }
+
+    if (userState == 3) {
+      navToMyPatients()
+      return
+    }
+
+  }
+
+  useEffect(() => {
+    handleState()
+    handleButtonText()
+  })
 
   return (
 
@@ -24,7 +96,7 @@ function Home() {
 
             <p className="text-[1.5rem]">Welcome to Marian Cure! </p>
             <p className="text-[3rem] font-bold leading-[3.5rem] mb-8">Take care of <br></br>your health is our <br></br>top priority.</p>
-            <button onClick={navToSubmitConcern} className='rounded-lg h-12 w-64 buttonMain'>Send us your concern</button>
+            <button onClick={handleButtonFunction} className='rounded-lg h-12 w-64 buttonMain font-semibold'>{buttonText}</button>
 
           </div>
 
@@ -53,7 +125,7 @@ function Home() {
             </div>
 
           </div>
-          
+
           <div className='flex flex-row items-center justify-center relative min-h-auto gap-12 mt-96 mx-auto text-center'>
 
             <div className='flex flex-col px-4'>
@@ -76,9 +148,9 @@ function Home() {
           <img className="flex flex-row relative h-[30em] w-full object-cover object-center" src={pharmacist} alt=""></img>
 
         </div>
-
+        <Footer />
       </div>
-      <Footer />
+
     </>
   )
 }

@@ -12,8 +12,8 @@ export const db = {
     user: [
         {
             user_id: 1, // NOTE: This is auto-increment
-            username: "svalerio",
-            password: "0522",
+            username: "SValerio",
+            password: "Patient1234",
             role_id: 1 // Foreign Key
         },
         {

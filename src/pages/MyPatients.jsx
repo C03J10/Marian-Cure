@@ -1,7 +1,29 @@
-import React from 'react'
-import Footer from "components/Footer"
+import React, { useState, useEffect, useContext } from 'react'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 
 function MyPatients() {
+
+  const navigate = useNavigate()
+  let userData = JSON.parse(sessionStorage.getItem('user'))
+
+  const columns = [
+    {
+      name: 'Title',
+      selector: row => row.title,
+    },
+    {
+      name: 'Year',
+      selector: row => row.year,
+    },
+  ];
+  
+  useEffect(() => {
+    if (userData.pharmacist_id === null) {
+      navigate("/home")
+      return
+    }
+  })
+
   return (
     <>
       <div className='h-screen w-full flex items-center justify-center gradientRight m-auto '>

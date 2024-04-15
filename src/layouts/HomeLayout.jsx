@@ -1,16 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, Suspense, lazy } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 import Navbar from 'components/Navbar'
-import { AuthContext } from 'hooks/authContext'
-
+import LoadingScreen from 'components/LoadingScreen '
 
 function HomeLayout() {
-  const { isLoggedIn } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!sessionStorage.getItem("isLoggedIn")) {
       navigate("/login")
       return
     }
@@ -19,11 +18,12 @@ function HomeLayout() {
   return (
 
     <>
-      <Navbar />
-      <div className='mt-20'>
-        <Outlet />
-      </div>
-
+      <Suspense fallback={<LoadingScreen />}>
+        <Navbar />
+        <div className='mt-20'>
+          <Outlet/>
+        </div>
+      </Suspense>
     </>
   )
 }

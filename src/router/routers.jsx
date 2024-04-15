@@ -1,15 +1,15 @@
-import React from "react"
+import React, { lazy } from "react"
 import { createBrowserRouter, Navigate } from "react-router-dom"
 
 import HomeLayout from "layouts/HomeLayout"
 
 import Login from "pages/Login"
-import MyPatients from "pages/MyPatients"
-
 import Reportform from "pages/Reportform"
-import Home from "pages/Home"
+import SubmitFeedback from "pages/SubmitFeedback"
 
-
+const Home = lazy(() => import('pages/Home'))
+const MyPatients = lazy(() => import("pages/MyPatients"))
+const ViewConcern = lazy(() => import("pages/ViewConcern"))
 
 function routers() {
 
@@ -22,10 +22,7 @@ function routers() {
       path: "/login",
       element: <Login />
     },
-    {
-      path: "/mypatients",
-      element: <MyPatients />
-    },
+
     {
       element: <HomeLayout />,
       children: [
@@ -33,12 +30,22 @@ function routers() {
           path: "/home",
           element: <Home />
         },
-      
         {
           path: "/submitconcern",
           element: <Reportform />
+        },
+        {
+          path: "/viewconcern",
+          element: <ViewConcern />
+        },
+        {
+          path: "/mypatients",
+          element: <MyPatients />
+        },
+        {
+          path: "/submitfeedback",
+          element: <SubmitFeedback />
         }
-
       ]
     }
   ])

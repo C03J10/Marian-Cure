@@ -17,21 +17,30 @@ body {
   @apply m-0;
 }
 
+textarea,
 input {
   @apply border;
   @apply border-blu-900;
   @apply bg-white;
 }
 
+textarea:active,
 input:active{
   @apply outline;
   @apply outline-blu-700;
 }
 
+textarea:focus,
 input:focus{
   @apply outline;
   @apply outline-blu-700;
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
 .buttonMain {
   @apply bg-blu-600;

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import 'primeicons/primeicons.css'
 
 import SideMenu from 'components/SideMenu'
-import { AuthContext } from 'hooks/authContext'
 import mariancure from 'assets/Logo/mariancure.png'
 
 function Navbar() {
@@ -28,11 +27,10 @@ function Navbar() {
           </span>
         </div>
 
-        {seeSideMenu && <SideMenu/>}
+        {seeSideMenu && <SideMenu handleSideMenu={handleSideMenu}/>}
 
         <div className=' flex flex-row float-right mr-0 m-auto text-[1.5rem] gap-7'>
 
-          <button className='pi pi-bell buttonIcon'></button>
           <button onClick={handleSideMenu} className='pi pi-align-right buttonIcon'></button>
 
         </div>

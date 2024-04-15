@@ -1,11 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import 'primeicons/primeicons.css'
 
 import Toast from 'components/Toast'
-import { db } from 'data/database'
 import { AuthContext } from 'hooks/authContext'
-import logpanel from "assets/logpanel.jpg"
+import { authUser } from 'server/fetch'
+import logpanel from "assets/logpanel.png"
 
 
 function Login() {
@@ -19,7 +19,6 @@ function Login() {
     const [toastMessage, setToastMessage] = useState('')
 
     const { isLoggedIn, user, login } = useContext(AuthContext)
-
     const navigate = useNavigate()
 
     const handlePasswordVisibility = () => {
@@ -42,64 +41,37 @@ function Login() {
             return
         }
 
-        db.user.map((data) => {
+        const response = await authUser(username, password);
+        
+        if(!response){
+            showToastVisibility('Error', 'Invalid credentials. Please try again.')
+            return
+        }
 
-            if (data.username == username && data.password == password) {
+        if (response.status===200){
+            login(response.data)
+            navigate('/home')
+            return
+        }
 
-                let userData = {
-                    username: data.username,
-                    user_id: data.user_id,
-                    role: 'Patient',
-                    pharmacist_id: 0,
-                    pharmacist_name: ''
-                }
+    }
 
-                db.pharmacist.map((pharmaData) => {
+    useEffect(() => {
+        if (sessionStorage.getItem("isLoggedIn")) {
+            navigate("/home")
+            return
+        }
+    })
 
-
-                    if (pharmaData.user_id == userData.user_id) {
-
-                        userData = {
-                            ...userData,
-                            role: 'Pharmacist',
-                            pharmacist_id: pharmaData.pharmacist_id,
-                            pharmacist_name: pharmaData.pharmacist_name
-                        }
-
-                    }
-
-                })
-                login(userData)
-                navigate('/home')
-                return
-
-            }
-        })
-
-        showToastVisibility('Error', 'Invalid credentials. Please try again.')
-
-}
-
-return (
-
-    <>
+    return (
 
         <div className='flex bg-white'>
 
             <div className="relative h-screen w-1/2">
 
                 <img className="absolute h-full w-full object-cover object-center" src={logpanel} alt="background" />
-
                 <div className="absolute z-10 h-full w-full bg-blu-400 opacity-60"></div>
-
                 <div className="absolute z-20 h-full w-full gradient"></div>
-
-                <div className='absolute z-30 h-full w-full flex flex-col items-center justify-center text-white'>
-
-
-
-                </div>
-
 
             </div>
 
@@ -152,9 +124,9 @@ return (
             </div>
 
         </div>
-    </>
 
-)
+
+    )
 }
 
 export default Login
