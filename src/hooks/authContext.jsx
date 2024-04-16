@@ -21,6 +21,7 @@ function AuthProvider({ children }) {
   const logout = () => {
     setUser(null)
     setIsLoggedIn(false)
+    sessionStorage.getItem("concern") ? sessionStorage.removeItem("concern") : null
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("user");
   }

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 
 import Footer from "components/Footer"
-import { AuthContext } from 'hooks/authContext'
 import { getConcern } from 'server/fetch'
 
 import doctor from 'assets/doctor.png'
@@ -24,18 +23,19 @@ function Home() {
   let userData = JSON.parse(sessionStorage.getItem('user'))
 
   const handleState = async () => {
-    if(userData.pharmacist_id != null){
+    if (userData.pharmacist_id != null) {
       setUserState(3)
       return
     }
 
     const response = await getConcern(userData.user_id);
 
-    if (response.status===200){
+    if (response.status === 200) {
+      sessionStorage.setItem('concern', JSON.stringify(response.data))
       setUserState(2)
       return
 
-    }else {
+    } else {
       setUserState(1)
       return
     }

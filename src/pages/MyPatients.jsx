@@ -1,27 +1,63 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
+import { getAllConcerns, getConcern } from 'server/fetch'
+import DataTable from 'react-data-table-component'
 
 function MyPatients() {
+
+  const [concerns, setConcerns] = useState([])
 
   const navigate = useNavigate()
   let userData = JSON.parse(sessionStorage.getItem('user'))
 
   const columns = [
     {
-      name: 'Title',
-      selector: row => row.title,
+      name: 'Name',
+      selector: row => row.name,
     },
     {
-      name: 'Year',
-      selector: row => row.year,
+      name: 'Contact Number',
+      selector: row => row.contact_number,
     },
+    {
+      name: 'Age',
+      selector: row => row.age,
+    },
+    {
+      name: 'Gender',
+      selector: row => row.gender,
+    },
+    {
+      name: 'Weight (kg)',
+      selector: row => row.weight,
+    },
+    {
+      name: 'Height (cm)',
+      selector: row => row.height,
+    },
+    {
+      name: 'View',
+      button: true,
+      cell: () => <button className='buttonIcon pi pi-eye'></button>
+    }
+
   ];
-  
+
+  const getConcerns = async () => {
+    const response = await getAllConcerns()
+    console.log(response.data)
+    return response.data
+  }
+
   useEffect(() => {
     if (userData.pharmacist_id === null) {
       navigate("/home")
       return
+    }else {
+      setConcerns(getConcerns())
     }
+
+    
   })
 
   return (
@@ -32,49 +68,8 @@ function MyPatients() {
 
           <h1 className='text-center text-[1.5rem] font-bold mb-9 items-center w-full '>Medical Reports</h1>
 
-          <table>
-
-            <thead className='bg-pink-400 h-12'>
-
-              <tr>
-                <th>
-                  Name
-                </th>
-
-                <th>
-                  Contact
-                </th>
-
-                <th>
-                  Age
-                </th>
-
-                <th>
-                  Gender
-                </th>
-
-                <th>
-                  Weight
-                </th>
-
-                <th>
-                  Height
-                </th>
-
-                <th>
-                  View
-                </th>
-              </tr>
-
-
-            </thead>
-
-            <tbody>
-
-            </tbody>
-
-          </table>
-
+          
+          <DataTable columns={columns} data={concerns}/>
         </div>
 
 
