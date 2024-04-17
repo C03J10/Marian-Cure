@@ -12,7 +12,7 @@ function Toast({ visible, toastType, toastMessage }) {
                 delay: 0.1,
             }}>
 
-            <div className='h-24 w-96 flex flex-row bg-gradient-to-b rounded-md to-white from-transparent shadow-xl z-10 right-4 top-4 m-auto absolute text-black'>
+            <div className='h-24 w-96 flex flex-row bg-white shadow-xl z-50 right-4 top-4 fixed m-auto  text-black'>
 
                 <div className=' rounded-l-md h-full w-2 bg-red-500'>
 

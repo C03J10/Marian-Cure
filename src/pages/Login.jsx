@@ -18,6 +18,8 @@ function Login() {
     const [toastType, setToastType] = useState('')
     const [toastMessage, setToastMessage] = useState('')
 
+    const [loading, setLoading] = useState(false)
+
     const { isLoggedIn, user, login } = useContext(AuthContext)
     const navigate = useNavigate()
 
@@ -36,23 +38,30 @@ function Login() {
 
     const auth = async () => {
 
-        if (username == '' || password == '') {
-            showToastVisibility('Error', 'Please fill out the fields first.')
-            return
+        setLoading(true)
+        try {
+            if (username == '' || password == '') {
+                showToastVisibility('Error', 'Please fill out the fields first.')
+                return
+            }
+
+            const response = await authUser(username, password);
+
+            if (!response) {
+                showToastVisibility('Error', 'Invalid credentials. Please try again.')
+                return
+            }
+
+            if (response.status === 200) {
+                login(response.data)
+                navigate('/home')
+                return
+            }
+        } finally {
+            setLoading(false)
         }
 
-        const response = await authUser(username, password);
         
-        if(!response){
-            showToastVisibility('Error', 'Invalid credentials. Please try again.')
-            return
-        }
-
-        if (response.status===200){
-            login(response.data)
-            navigate('/home')
-            return
-        }
 
     }
 
@@ -115,7 +124,8 @@ function Login() {
 
                         </div>
 
-                        <button onClick={auth} id="loginButton" className='h-12 w-full buttonMain text-white mb-4 rounded-lg'>Log In</button>
+                        <button onClick={auth} id="loginButton" disabled={loading} className='h-12 w-full buttonMain text-white mb-4 rounded-lg'>
+                            {loading ? <i className='pi pi-spinner pi-spin'></i> : "Log In"}</button>
 
                     </div>
 

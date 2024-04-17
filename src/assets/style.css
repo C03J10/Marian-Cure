@@ -55,6 +55,10 @@ input[type="number"]::-webkit-outer-spin-button {
   @apply bg-blu-800
 }
 
+.buttonMain:disabled {
+  @apply bg-blu-500
+}
+
 .buttonIcon {
   @apply text-blu-900;
 }

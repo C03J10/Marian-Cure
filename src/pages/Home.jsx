@@ -42,7 +42,7 @@ function Home() {
 
   }
 
-  const handleButtonText = () => {
+  const handleButtonText = async() => {
 
     if (userState == 1) {
       setButtonText('Send us your concern')
@@ -116,7 +116,7 @@ function Home() {
 
             <div className='flex flex-col items-center justify-start w-[20%] gap-3'>
               <img className="h-[6em] w-[6em] object-cover object-center" src={stethoscope} alt=""></img>
-              <h6 className='text-[1rem] text-center'>Monitor medication use, adherence, and adverse effects to improve health outcomes.</h6>
+              <h6 className='text-[1rem] text-center'>Monitor medication use and adverse effects to improve health outcomes.</h6>
             </div>
 
             <div className='flex flex-col items-center justify-start w-[20%] gap-3'>

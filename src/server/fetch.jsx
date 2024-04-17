@@ -31,8 +31,15 @@ export const getConcernByID = async (concern_id) => {
     return response
 }
 
-export const submitConcern = async () => {
-
+export const submitConcern = async (concern) => {
+    let response;
+    try {
+        response = await axios.post(`${url}add_concern`, concern )
+        console.log(response.data)
+    } catch (error) {
+        return false
+    }
+    return response
 }
 
 export const getAllConcerns = async () => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate} from 'react-router-dom'
-import { getAllConcerns, getConcern } from 'server/fetch'
+import { getAllConcerns } from 'server/fetch'
 import DataTable from 'react-data-table-component'
 
 function MyPatients() {
@@ -45,8 +45,8 @@ function MyPatients() {
 
   const getConcerns = async () => {
     const response = await getAllConcerns()
-    console.log(response.data)
-    return response.data
+    setConcerns(response.data)
+
   }
 
   useEffect(() => {
@@ -54,11 +54,9 @@ function MyPatients() {
       navigate("/home")
       return
     }else {
-      setConcerns(getConcerns())
+      getConcerns()
     }
-
-    
-  })
+  }, [])
 
   return (
     <>
