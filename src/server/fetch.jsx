@@ -49,6 +49,7 @@ export const getAllConcerns = async () => {
 
 export const submitFeedback = async (feedback) => {
     let response;
+    console.log(feedback)
     try {
         response = await axios.post(`${url}add_feedback`, feedback )
         console.log(response.data)

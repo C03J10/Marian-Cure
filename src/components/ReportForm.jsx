@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Toast from 'components/Toast'
 
-import { submitConcern } from 'server/fetch'
+import { submitConcern, submitFeedback } from 'server/fetch'
 
 function ReportForm({ state }) {
 
@@ -24,7 +24,7 @@ function ReportForm({ state }) {
     const [doesBreastfeed, setDoesBreastfeed] = useState(false)
     const [doesDrinkAlcohol, setDoesDrinkAlcohol] = useState(false)
     const [doesSmoke, setDoesSmoke] = useState(false)
-    const [packs, setPacks] = useState('')
+    const [packs, setPacks] = useState(0)
     const [handlePacks, setHandlePacks] = useState('')
 
     const [chiefComplaint, setChiefComplaint] = useState('')
@@ -81,15 +81,12 @@ function ReportForm({ state }) {
         setCurMed(concernData.current_medication)
         setDateConcern(formatDate(concernData.date_concern_submitted))
 
-        if (hasFeedback) {
-            setHasPharmacist(true)
+        if (hasFeedback && state != "feedback") {
             setAssessment(concernData.assessment_content)
             setPlan(concernData.plan_content)
             setDateFeedback(formatDate(concernData.date_feedback_submitted))
             setPharmacist(concernData.pharmacist_name)
         }
-
-
 
     }
 
@@ -115,7 +112,7 @@ function ReportForm({ state }) {
 
         if (state === "view" && userData.pharmacist_id != null && !hasFeedback) {
             return (
-                <button onClick={() => navtoSubmitFeedback} className='h-12 w-1/4 buttonMain text-white font-rubik font-bold'>
+                <button onClick={navtoSubmitFeedback} className='h-12 w-1/4 buttonMain text-white font-rubik font-bold'>
                     Send Feedback</button>
             )
         } else {
@@ -129,8 +126,8 @@ function ReportForm({ state }) {
 
         try {
 
-            if ((fullName === '' || gender === '' || age === '' || contactNumber === '' || weight === '' || height === '' ||
-                chiefComplaint === '' || familyHistory === '' || allergyHistory === '' || curMed === '') || (doesSmoke && packs === '')) {
+            if (fullName === '' || gender === '' || age === '' || contactNumber === '' || weight === '' || height === '' ||
+                chiefComplaint === '' || familyHistory === '' || allergyHistory === '' || curMed === '') {
                 showToastVisibility('Error', 'Please fill out the fields first.')
                 return
             }
@@ -155,6 +152,8 @@ function ReportForm({ state }) {
                 user_id: userData.user_id
             }
 
+            console.log(concern)
+
 
             const response = await submitConcern(concern)
 
@@ -178,6 +177,39 @@ function ReportForm({ state }) {
 
     const addFeedback = async () => {
 
+        setLoading(true)
+
+        try {
+
+            if (assessment === "" || plan === ""  ) {
+                showToastVisibility('Error', 'Please fill out the fields first.')
+                return
+            }
+
+            let plans = {
+                assessment_content: assessment,
+                plan_content: plan,
+                concern_id: parseInt(concernData.concern_id),
+                pharmacist_id: parseInt(userData.pharmacist_id)
+            }
+
+            const response = await submitFeedback(plans)
+
+            if (!response) {
+                showToastVisibility('Error', 'Something went wrong. Please try again.')
+                return
+            }
+
+            if (response.status === 200) {
+
+                navigate("/mypatients")
+                return
+
+            }
+
+        } finally {
+            setLoading(false)
+        }
     }
 
     const handlePregnantCheck = () => {
@@ -199,12 +231,9 @@ function ReportForm({ state }) {
 
     useEffect(() => {
 
-        console.log(concernData)
-
         if (state == "submit") {
             setForView(false)
             setHasFeedback(false)
-            setForFeedbackView(true)
             setFormTitle("Pharmacist Details")
             return
         }
@@ -214,6 +243,7 @@ function ReportForm({ state }) {
             
             if (concernData.feedback_id != null) {
                 setHasFeedback(true)
+                setHasPharmacist(true)
             }
             if (userData.pharmacist_id != null) {
                 setFormTitle("Medical Report Form")
@@ -234,7 +264,7 @@ function ReportForm({ state }) {
             return
         }
 
-    }, [])
+})
 
     return (
 
