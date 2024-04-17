@@ -27,7 +27,7 @@ export const getConcern = async (user_id) => {
 }
 
 export const getConcernByID = async (concern_id) => {
-    const response = await axios(`${url}concern/${concern_id}`)
+    const response = await axios(`${url}concerns/${concern_id}`)
     return response
 }
 
@@ -47,6 +47,13 @@ export const getAllConcerns = async () => {
     return response
 }
 
-export const submitFeedback = async () => {
-
+export const submitFeedback = async (feedback) => {
+    let response;
+    try {
+        response = await axios.post(`${url}add_feedback`, feedback )
+        console.log(response.data)
+    } catch (error) {
+        return false
+    }
+    return response
 }

@@ -10,6 +10,7 @@ function ReportForm({ state }) {
     const [forView, setForView] = useState(true)
     const [forFeedbackView, setForFeedbackView] = useState(true)
     const [hasFeedback, setHasFeedback] = useState(false)
+    const [hasPharmacist, setHasPharmacist] = useState(false)
     const [formTitle, setFormTitle] = useState(false)
 
     const [fullName, setFullName] = useState('')
@@ -46,6 +47,7 @@ function ReportForm({ state }) {
     const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate()
+    const navtoSubmitFeedback = () => navigate("/submitfeedback")
 
     let concernData = JSON.parse(sessionStorage.getItem("concern"))
     let userData = JSON.parse(sessionStorage.getItem("user"))
@@ -80,11 +82,14 @@ function ReportForm({ state }) {
         setDateConcern(formatDate(concernData.date_concern_submitted))
 
         if (hasFeedback) {
+            setHasPharmacist(true)
             setAssessment(concernData.assessment_content)
             setPlan(concernData.plan_content)
             setDateFeedback(formatDate(concernData.date_feedback_submitted))
             setPharmacist(concernData.pharmacist_name)
         }
+
+
 
     }
 
@@ -101,7 +106,19 @@ function ReportForm({ state }) {
             )
         }
 
-        if (state === "view") {
+        if (state === "feedback") {
+            return (
+                <button onClick={addFeedback} disabled={loading} className='h-12 w-1/4 buttonMain text-white font-rubik font-bold'>
+                    {loading ? <i className='pi pi-spinner pi-spin'></i> : "Submit"}</button>
+            )
+        }
+
+        if (state === "view" && userData.pharmacist_id != null && !hasFeedback) {
+            return (
+                <button onClick={() => navtoSubmitFeedback} className='h-12 w-1/4 buttonMain text-white font-rubik font-bold'>
+                    Send Feedback</button>
+            )
+        } else {
             return null
         }
     }
@@ -146,17 +163,21 @@ function ReportForm({ state }) {
                 return
             }
 
-            if(response.status === 200){
+            if (response.status === 200) {
 
                 navigate("/home")
                 return
 
             }
 
-        }finally {
+        } finally {
             setLoading(false)
         }
-        
+
+    }
+
+    const addFeedback = async () => {
+
     }
 
     const handlePregnantCheck = () => {
@@ -177,19 +198,23 @@ function ReportForm({ state }) {
     }
 
     useEffect(() => {
+
+        console.log(concernData)
+
         if (state == "submit") {
             setForView(false)
             setHasFeedback(false)
             setForFeedbackView(true)
             setFormTitle("Pharmacist Details")
+            return
         }
         if (state == "view") {
             setForView(true)
             setForFeedbackView(true)
+            
             if (concernData.feedback_id != null) {
                 setHasFeedback(true)
             }
-
             if (userData.pharmacist_id != null) {
                 setFormTitle("Medical Report Form")
             } else {
@@ -197,14 +222,19 @@ function ReportForm({ state }) {
             }
 
             addData()
+            return
+            
         }
         if (state == "feedback") {
             setForView(true)
             setHasFeedback(true)
             setForFeedbackView(false)
             setFormTitle("Medical Report Form")
+            addData()
+            return
         }
-    })
+
+    }, [])
 
     return (
 
@@ -391,22 +421,27 @@ function ReportForm({ state }) {
 
                                 </div>
 
+                                {
+                                    hasPharmacist &&
 
-                                <div className='flex flex-col gap-3'>
-                                    <div className='flex flex-row'>
+                                    <div className='flex flex-col gap-3'>
+                                        <div className='flex flex-row'>
 
-                                        <label htmlFor="pharmacistInput" className='font-semibold'> Pharmacist: </label>
-                                        <input type="text" value={pharmacist} className='px-2 border-t-0 border-x-0 border-b-12 w-64' disabled={forView} />
+                                            <label htmlFor="pharmacistInput" className='font-semibold'> Pharmacist: </label>
+                                            <input type="text" value={pharmacist} className='px-2 border-t-0 border-x-0 border-b-12 w-64' disabled={forView} />
 
+                                        </div>
+
+                                        <div className='flex flex-row' >
+
+                                            <label htmlFor="dateFeedbackInput" className='font-semibold'> Date Assessment Submitted: </label>
+                                            <input type="text" value={dateFeedback} className='px-2 border-t-0 border-x-0 border-b-12 w-64' disabled={forView} />
+
+                                        </div>
                                     </div>
 
-                                    <div className='flex flex-row' >
+                                }
 
-                                        <label htmlFor="dateFeedbackInput" className='font-semibold'> Date Assessment Submitted: </label>
-                                        <input type="text" value={dateFeedback} className='px-2 border-t-0 border-x-0 border-b-12 w-64' disabled={forView} />
-
-                                    </div>
-                                </div>
 
 
                             </div>
