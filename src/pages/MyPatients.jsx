@@ -74,12 +74,11 @@ function MyPatients() {
 
   return (
     <>
-      <div className='h-screen w-full flex items-center justify-center gradientRight m-auto '>
+      <div className='min-h-screen w-full flex items-center justify-center gradientRight m-auto '>
 
-        <div className='h-4/5 w-4/5 flex flex-col bg-white text-black p-12 rounded-xl'>
+        <div className='min-h-4/5 w-4/5 flex flex-col bg-white text-black p-12 rounded-xl my-12'>
 
           <h1 className='text-center text-[1.5rem] font-bold mb-9 items-center w-full '>Medical Reports</h1>
-
           
           <DataTable columns={columns} data={concerns} pagination/>
         </div>

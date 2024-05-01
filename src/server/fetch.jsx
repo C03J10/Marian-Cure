@@ -15,6 +15,39 @@ export const authUser = async (username, pwd) => {
     return response
 }
 
+export const registerUser = async(user) => {
+    let response;
+    try{
+        response = await axios.post(`${url}add_user`, user )
+        console.log(response.data)
+    }catch (error) {
+        return false
+    }
+    return response
+}
+
+export const updatePass = async(username, pwd) => {
+    let response;
+    try {
+        response = await axios.put(`${url}update_password?username=${username}&password=${pwd}`)
+    }catch(error){
+        return false
+    }
+    return response
+}
+
+export const getUsername = async(username) =>{
+    let response;
+
+    try{
+        response = await axios(`${url}get_username?username=${username}`)
+    }catch (error){
+        return false
+    }
+
+    return response
+}
+
 export const getConcern = async (user_id) => {
     let response;
     try {

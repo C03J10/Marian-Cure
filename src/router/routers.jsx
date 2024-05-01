@@ -2,8 +2,11 @@ import React, { lazy } from "react"
 import { createBrowserRouter, Navigate } from "react-router-dom"
 
 import HomeLayout from "layouts/HomeLayout"
+import FrontPanelLayout from "layouts/FrontPanelLayout"
 
 import Login from "pages/Login"
+import Register from "pages/Register"
+import ForgotPassword from "pages/ForgotPassword"
 import Reportform from "pages/Reportform"
 import SubmitFeedback from "pages/SubmitFeedback"
 
@@ -19,10 +22,22 @@ function routers() {
       element: <Navigate to="/login" replace={true} />
     },
     {
-      path: "/login",
-      element: <Login />
+      element: <FrontPanelLayout />,
+      children: [
+        {
+          path: "/login",
+          element: <Login />
+        },
+        {
+          path: "/register",
+          element: <Register />
+        },
+        {
+          path: "/forgotpassword",
+          element: <ForgotPassword />
+        },
+      ]
     },
-
     {
       element: <HomeLayout />,
       children: [

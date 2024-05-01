@@ -5,8 +5,6 @@ import 'primeicons/primeicons.css'
 import Toast from 'components/Toast'
 import { AuthContext } from 'hooks/authContext'
 import { authUser } from 'server/fetch'
-import logpanel from "assets/logpanel.png"
-
 
 function Login() {
 
@@ -22,6 +20,9 @@ function Login() {
 
     const { isLoggedIn, user, login } = useContext(AuthContext)
     const navigate = useNavigate()
+
+    const navToReg = () => navigate("/register")
+    const navToForgotPass = () => navigate("/forgotpassword")
 
     const handlePasswordVisibility = () => {
         setShowPassword(!showPassword)
@@ -61,8 +62,6 @@ function Login() {
             setLoading(false)
         }
 
-        
-
     }
 
     useEffect(() => {
@@ -74,58 +73,59 @@ function Login() {
 
     return (
 
-        <div className='flex bg-white'>
 
-            <div className="relative h-screen w-1/2">
+        <div className='w-full h-full flex flex-col items-center justify-center m-auto text-black font-rubik'>
 
-                <img className="absolute h-full w-full object-cover object-center" src={logpanel} alt="background" />
-                <div className="absolute z-10 h-full w-full bg-blu-400 opacity-60"></div>
-                <div className="absolute z-20 h-full w-full gradient"></div>
+            {showToast && <Toast visible={showToast} toastType={toastType} toastMessage={toastMessage} />}
 
-            </div>
+            <div className='h-full w-3/5 flex flex-col'>
 
-            <div className='w-1/2 h-full flex flex-col items-center justify-center m-auto text-black font-rubik'>
+                <h1 className='text-left text-[3rem] font-bold'>
+                    Login
+                </h1>
 
-                {showToast && <Toast visible={showToast} toastType={toastType} toastMessage={toastMessage} />}
+                <p className="mb-9">
+                    To proceed, log in with your account.
+                </p>
 
-                <div className='h-full w-3/5 flex flex-col'>
+                <div className='font-semibold'>
 
-                    <h1 className='text-left text-[3rem] font-bold'>
-                        Login
-                    </h1>
+                    <div className="flex flex-col mb-3">
 
-                    <p className="mb-9">
-                        To proceed, log in with your account.
-                    </p>
+                        <label htmlFor="usernameInput" className='mb-1'>username</label>
+                        <input type="text" id='usernameInput' value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Enter your username'
+                            className='h-12 w-full rounded-lg px-4 font-normal' />
 
-                    <div className='font-semibold'>
+                    </div>
 
-                        <div className="flex flex-col mb-4">
+                    <div className="flex flex-col mb-3">
 
-                            <label htmlFor="usernameInput" className='mb-1'>username</label>
-                            <input type="text" id='usernameInput' value={username} onChange={(e) => setUsername(e.target.value)} placeholder='Enter your username'
-                                className='h-12 w-full rounded-lg px-4 font-normal' />
+                        <label htmlFor="passwordInput" className='mb-1'>password</label>
 
-                        </div>
+                        <div className='flex flex-row h-12 w-full relative'>
 
-                        <div className="flex flex-col mb-9">
+                            <input type={showPassword ? "text" : "password"} id='passwordInput' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password'
+                                className='absolute h-12 w-full rounded-lg px-4 font-normal' />
 
-                            <label htmlFor="passwordInput" className='mb-1'>password</label>
-
-                            <div className='flex flex-row h-12 w-full relative'>
-
-                                <input type={showPassword ? "text" : "password"} id='passwordInput' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password'
-                                    className='absolute h-12 w-full rounded-lg px-4 font-normal' />
-
-                                <button id='passwordVisibilityButton' value={showPassword} onClick={handlePasswordVisibility}
-                                    className={`absolute h-full buttonIcon pi pi-${showPassword ? 'eye-slash' : 'eye'} float-right right-4`}></button>
-
-                            </div>
+                            <button id='passwordVisibilityButton' value={showPassword} onClick={handlePasswordVisibility}
+                                className={`absolute h-full buttonIcon pi pi-${showPassword ? 'eye-slash' : 'eye'} float-right right-4`}></button>
 
                         </div>
 
-                        <button onClick={auth} id="loginButton" disabled={loading} className='h-12 w-full buttonMain text-white mb-4 rounded-lg'>
-                            {loading ? <i className='pi pi-spinner pi-spin'></i> : "Log In"}</button>
+                    </div>
+
+                    <div className="flex flex-col mb-9">
+
+                        <button onClick={navToForgotPass} className='font-medium buttonIcon float-right ml-auto text-[0.75rem]'>Forgot Password?</button>
+
+                    </div>
+
+                    <button onClick={auth} id="loginButton" disabled={loading} className='h-12 w-full buttonMain text-white mb-4 rounded-lg'>
+                        {loading ? <i className='pi pi-spinner pi-spin'></i> : "Log In"}</button>
+
+                    <div className='flex flex-col'>
+
+                        <button onClick={navToReg} className='font-medium buttonIcon mx-auto text-[0.75rem]'>New here? Sign up</button>
 
                     </div>
 
