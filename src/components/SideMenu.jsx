@@ -28,16 +28,12 @@ function SideMenu({handleSideMenu}) {
   }
 
   const addTab = () => {
-    return userData.pharmacist_id != null ? 
+    return userData.role_name == "Pharmacist" ? 
     <button onClick={navToMyPatients} className='buttonIcon font-semibold'>My Patients</button> : null
   }
 
   useEffect(() => {
-    if(userData.pharmacist_id != null){
-      setUsername(userData.pharmacist_name)
-    }else {
-      setUsername(userData.username)
-    }
+    setUsername(userData.full_name)
     
   })
 

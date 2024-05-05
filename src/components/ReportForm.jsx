@@ -30,6 +30,7 @@ function ReportForm({ state }) {
     const [chiefComplaint, setChiefComplaint] = useState('')
     const [familyHistory, setFamilyHistory] = useState('')
     const [allergyHistory, setAllergyHistory] = useState('')
+    const [patientHistory, setPatientHistory] = useState('')
     const [prevMed, setPrevMed] = useState('')
     const [curMed, setCurMed] = useState('')
 
@@ -77,6 +78,7 @@ function ReportForm({ state }) {
         setChiefComplaint(concernData.chief_complaint_content)
         setFamilyHistory(concernData.family_history_content)
         setAllergyHistory(concernData.allergy_history_content)
+        setPatientHistory(concernData.patient_history_content)
         setPrevMed(concernData.previous_medication)
         setCurMed(concernData.current_medication)
         setDateConcern(formatDate(concernData.date_concern_submitted))
@@ -84,8 +86,8 @@ function ReportForm({ state }) {
         if (hasFeedback && state != "feedback") {
             setAssessment(concernData.assessment_content)
             setPlan(concernData.plan_content)
-            setDateFeedback(formatDate(concernData.date_feedback_submitted))
-            setPharmacist(concernData.pharmacist_name)
+            setDateFeedback(formatDate(concernData.date_assessment_submitted))
+            setPharmacist(concernData.full_name)
         }
 
     }
@@ -110,7 +112,7 @@ function ReportForm({ state }) {
             )
         }
 
-        if (state === "view" && userData.pharmacist_id != null && !hasFeedback) {
+        if (state === "view" && userData.role_name == "Pharmacist" && !hasFeedback) {
             return (
                 <button onClick={navtoSubmitFeedback} className='h-12 w-1/4 buttonMain text-white font-rubik font-bold'>
                     Send Feedback</button>
@@ -127,7 +129,7 @@ function ReportForm({ state }) {
         try {
 
             if (fullName === '' || gender === '' || age === '' || contactNumber === '' || weight === '' || height === '' ||
-                chiefComplaint === '' || familyHistory === '' || allergyHistory === '' || curMed === '') {
+                chiefComplaint === '' || familyHistory === '' || allergyHistory === '' ||patientHistory === '' || curMed === '') {
                 showToastVisibility('Error', 'Please fill out the fields first.')
                 return
             }
@@ -147,6 +149,7 @@ function ReportForm({ state }) {
                 chief_complaint_content: chiefComplaint,
                 family_history_content: familyHistory,
                 allergy_history_content: allergyHistory,
+                patient_history_content: patientHistory,
                 previous_medication: prevMed,
                 current_medication: curMed,
                 user_id: userData.user_id
@@ -190,7 +193,7 @@ function ReportForm({ state }) {
                 assessment_content: assessment,
                 plan_content: plan,
                 concern_id: parseInt(concernData.concern_id),
-                pharmacist_id: parseInt(userData.pharmacist_id)
+                user_id: parseInt(userData.user_id)
             }
 
             const response = await submitFeedback(plans)
@@ -241,11 +244,11 @@ function ReportForm({ state }) {
             setForView(true)
             setForFeedbackView(true)
             
-            if (concernData.feedback_id != null) {
+            if (concernData.assessment_id != null) {
                 setHasFeedback(true)
                 setHasPharmacist(true)
             }
-            if (userData.pharmacist_id != null) {
+            if (userData.role_name == "Pharmacist") {
                 setFormTitle("Medical Report Form")
             } else {
                 setFormTitle("Patient Details")
@@ -396,6 +399,13 @@ function ReportForm({ state }) {
                             <label htmlFor="allergyInput" className='font-semibold'>Allergy History</label>
                             <textarea type="text" id='allergyInput' placeholder='Input your allergy history here' disabled={forView}
                                 value={allergyHistory} onChange={(e) => setAllergyHistory(e.target.value)}
+                                className='h-[8em] rounded-lg w-full p-4' />
+                        </div>
+
+                        <div className='flex flex-col'>
+                            <label htmlFor="patientHistoryInput" className='font-semibold'>Patient History</label>
+                            <textarea type="text" id='patientHistoryInput' placeholder='Input your patient history here' disabled={forView}
+                                value={patientHistory} onChange={(e) => setPatientHistory(e.target.value)}
                                 className='h-[8em] rounded-lg w-full p-4' />
                         </div>
 
