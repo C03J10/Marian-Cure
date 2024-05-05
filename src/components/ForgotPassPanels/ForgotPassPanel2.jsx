@@ -1,6 +1,63 @@
-import React from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+import 'primeicons/primeicons.css'
 
-function ForgotPassPanel2() {
+import { ForgotPassContext } from 'hooks/forgotPassContext'
+import { updatePass } from 'server/fetch'
+
+function ForgotPassPanel2({ showToastVisibility }) {
+
+    const navigate = useNavigate();
+    const navToLogin = () => navigate('/login')
+
+    const [password, setPassword] = useState('')
+    const [confPassword, setConfPassword] = useState('')
+
+    const [disable, setDisable] = useState(false)
+    const [buttonText, setButtonText] = useState('Submit')
+
+    const { userData, setUserData, prevStep, nextStep } = useContext(ForgotPassContext)
+
+    const update = async () => {
+
+        setDisable(true)
+        setButtonText(<i className='pi pi-spinner pi-spin'></i>)
+
+        if (password != confPassword) {
+            showToastVisibility('Error', "Passwords don't match.")
+            return
+        }
+
+        try {
+
+            const response = await updatePass(userData.email_address, password)
+
+            if (!response) {
+                showToastVisibility('Error', 'Something went wrong. Please try again.')
+                return
+            }
+
+            if (response.status === 200) {
+
+                navToLogin()
+                return
+
+            }
+
+        } finally {
+            setDisable(false)
+            setButtonText('Submit')
+        }
+    }
+
+    useEffect(() => {
+        if (password == '' || confPassword == '') {
+            setDisable(true)
+            return
+        }
+        setDisable(false)
+    })
+
     return (
         <div className='flex flex-col w-full'>
 
@@ -27,8 +84,8 @@ function ForgotPassPanel2() {
                 <button onClick={prevStep} id="loginButton" className='h-12 w-36 buttonMain text-white mb-4 rounded-lg'>
                     Back</button>
 
-                <button onClick={register} disabled={loading} id="loginButton" className='h-12 w-36 buttonMain text-white mb-4 rounded-lg float-right ml-auto'>
-                    {loading ? <i className='pi pi-spinner pi-spin'></i> : "Submit"}</button>
+                <button onClick={update} disabled={disable} id="loginButton" className='h-12 w-36 buttonMain text-white mb-4 rounded-lg float-right ml-auto'>
+                    {buttonText}</button>
 
             </div>
 

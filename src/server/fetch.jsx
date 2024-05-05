@@ -26,21 +26,21 @@ export const registerUser = async(user) => {
     return response
 }
 
-export const updatePass = async(username, pwd) => {
+export const updatePass = async(email, pwd) => {
     let response;
     try {
-        response = await axios.put(`${url}update_password?username=${username}&password=${pwd}`)
+        response = await axios.put(`${url}update_password?email_address=${email}&password=${pwd}`)
     }catch(error){
         return false
     }
     return response
 }
 
-export const getUsername = async(username) =>{
+export const getEmailAddress = async(email) =>{
     let response;
 
     try{
-        response = await axios(`${url}get_username?username=${username}`)
+        response = await axios(`${url}get_email_address?email_address=${email}`)
     }catch (error){
         return false
     }

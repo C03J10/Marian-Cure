@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import 'primeicons/primeicons.css'
 
@@ -6,23 +6,18 @@ import ForgotPassPanel1 from 'components/ForgotPassPanels/ForgotPassPanel1'
 import ForgotPassPanel2 from 'components/ForgotPassPanels/ForgotPassPanel2'
 import Toast from 'components/Toast'
 
+import { ForgotPassContext } from 'hooks/forgotPassContext'
+
 function ForgotPassword() {
 
   const navigate = useNavigate();
-  const navToLogin = () => navigate('/login');
+  const navToLogin = () => navigate('/login')
+
+  const { step } = useContext(ForgotPassContext)
 
   const [showToast, setShowToast] = useState(false)
   const [toastType, setToastType] = useState('')
   const [toastMessage, setToastMessage] = useState('')
-
-  const renderStep = () => {
-    switch (step) {
-      case 1:
-        return <ForgotPassPanel1 />
-      case 2:
-        return <ForgotPassPanel2 />
-    }
-  };
 
   const showToastVisibility = (toastTypeProp, toastMessageProp) => {
 
@@ -31,6 +26,15 @@ function ForgotPassword() {
     setToastMessage(toastMessageProp)
 
     setTimeout(() => setShowToast(false), 3000)
+  }
+
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return <ForgotPassPanel1 showToastVisibility={showToastVisibility} />
+      case 2:
+        return <ForgotPassPanel2 showToastVisibility={showToastVisibility}/>
+    }
   }
 
   return (
@@ -42,7 +46,7 @@ function ForgotPassword() {
       <div className='h-full w-3/5 flex flex-col'>
 
         <button onClick={navToLogin} className='text-[1rem] buttonIcon pi pi-arrow-left mr-auto'></button>
-        
+
         <h1 className='text-left text-[3rem] font-bold'>
           Forgot Password
         </h1>

@@ -23,7 +23,7 @@ function Home() {
   let userData = JSON.parse(sessionStorage.getItem('user'))
 
   const handleState = async () => {
-    if (userData.pharmacist_id != null) {
+    if (userData.role_name == "Pharmacist") {
       setUserState(3)
       return
     }

@@ -25,11 +25,6 @@ function RegisterPanel3({ showToastVisibility }) {
 
         try {
 
-            if (password == "" || confPassword == "") {
-                showToastVisibility('Error', 'Please fill out the fields first.')
-                return
-            }
-
             if (password != confPassword) {
                 showToastVisibility('Error', "Passwords don't match.")
                 return

@@ -11,6 +11,7 @@ import Reportform from "pages/Reportform"
 import SubmitFeedback from "pages/SubmitFeedback"
 
 import RegisterProvider from 'hooks/registerContext'
+import ForgotPassProvider from "hooks/forgotPassContext"
 
 const Home = lazy(() => import('pages/Home'))
 const MyPatients = lazy(() => import("pages/MyPatients"))
@@ -31,16 +32,17 @@ function routers() {
           element: <Login />
         },
         {
-          element: 
-          <RegisterProvider >
-            <Register/>
-          </RegisterProvider>,
-          path: "/register"
-
+          path: "/register",
+          element:
+            <RegisterProvider >
+              <Register />
+            </RegisterProvider> 
         },
         {
           path: "/forgotpassword",
-          element: <ForgotPassword />
+          element: <ForgotPassProvider>
+            <ForgotPassword />
+          </ForgotPassProvider>
         },
       ]
     },

@@ -37,7 +37,7 @@ function Register() {
             case 2:
                 return <RegisterPanel2 />
             case 3:
-                return <RegisterPanel3 />
+                return <RegisterPanel3 showToastVisibility={showToastVisibility} />
         }
     };
 
