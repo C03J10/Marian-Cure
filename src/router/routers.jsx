@@ -9,6 +9,8 @@ import Register from "pages/Register"
 import ForgotPassword from "pages/ForgotPassword"
 import Reportform from "pages/Reportform"
 import SubmitFeedback from "pages/SubmitFeedback"
+import MyConcern from "pages/MyConcern"
+
 
 import RegisterProvider from 'hooks/registerContext'
 import ForgotPassProvider from "hooks/forgotPassContext"
@@ -24,6 +26,12 @@ function routers() {
       path: "/",
       element: <Navigate to="/login" replace={true} />
     },
+
+    {
+      path: "/myconcern",
+      element: <MyConcern />
+    },
+
     {
       element: <FrontPanelLayout />,
       children: [
