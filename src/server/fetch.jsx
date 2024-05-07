@@ -19,7 +19,6 @@ export const registerUser = async(user) => {
     let response;
     try{
         response = await axios.post(`${url}add_user`, user )
-        console.log(response.data)
     }catch (error) {
         return false
     }
@@ -52,7 +51,6 @@ export const getConcern = async (user_id) => {
     let response;
     try {
         response = await axios(`${url}concern?user_id=${user_id}`)
-        console.log(response.data)
     } catch (error) {
         return false
     }
@@ -68,7 +66,6 @@ export const submitConcern = async (concern) => {
     let response;
     try {
         response = await axios.post(`${url}add_concern`, concern )
-        console.log(response.data)
     } catch (error) {
         return false
     }

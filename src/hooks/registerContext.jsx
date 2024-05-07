@@ -8,6 +8,7 @@ function RegisterProvider({ children }) {
     const [userData, setUserData] = useState({
         username: '',
         full_name: '',
+        email_address: '',
         role_name: '',
         password: ''
     });

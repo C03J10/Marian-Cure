@@ -14,14 +14,14 @@ function RegisterPanel2() {
 
     const nextStep2 = () => {
 
-        setUserData(
+        setUserData((userData) => (
             {
                 ...userData,
                 full_name: fullName,
                 username: username,
                 email_address: emailAddress
             }
-        )
+        ))
         nextStep()
     }
 

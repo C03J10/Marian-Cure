@@ -14,12 +14,10 @@ function RegisterPanel1() {
 
     const nextStep1 = () => {
 
-        setUserData({
+        setUserData((userData) => ({
             ...userData,
             role_name: role
-        })
-
-        console.log(userData)
+        }))
         nextStep()
     }
 

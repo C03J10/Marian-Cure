@@ -30,15 +30,15 @@ function RegisterPanel3({ showToastVisibility }) {
                 return
             }
 
-            setUserData(
-                {
-                    ...userData,
-                    password: password
-                }
-            )
+            let user = {
+                full_name: userData.full_name,
+                username: userData.username,
+                email_address: userData.email_address,
+                role_name: userData.role_name,
+                password: password
+            }
 
-            console.log(userData)
-            const response = await registerUser(userData)
+            const response = await registerUser(user)
 
             if (!response) {
                 showToastVisibility('Error', 'Something went wrong. Please try again.')

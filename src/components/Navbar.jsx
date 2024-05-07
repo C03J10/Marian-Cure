@@ -18,7 +18,7 @@ function Navbar() {
       <div className='flex flex-row w-full h-20 fixed top-0 z-40 px-12 gap-3 items-center bg-white shadow-lg'>
 
         <img src={mariancure} alt="Marian Cure Logo" className='w-16 h-16' />
-        <div className='text-[1.5rem] font-itim font-bold'>
+        <div className='text-[1.5rem] font-itim font-bold hidden md:block'>
           <span className='text-pinkie'>
             Marian
           </span>
