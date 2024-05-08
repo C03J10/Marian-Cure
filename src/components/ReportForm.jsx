@@ -237,7 +237,7 @@ function ReportForm({ state }) {
         if (state == "submit") {
             setForView(false)
             setHasFeedback(false)
-            setFormTitle("Pharmacist Details")
+            setFormTitle("Patient Details")
             return
         }
         if (state == "view") {

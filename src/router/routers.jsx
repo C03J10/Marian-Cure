@@ -26,12 +26,6 @@ function routers() {
       path: "/",
       element: <Navigate to="/login" replace={true} />
     },
-
-    {
-      path: "/myconcern",
-      element: <MyConcern />
-    },
-
     {
       element: <FrontPanelLayout />,
       children: [
@@ -68,6 +62,10 @@ function routers() {
         {
           path: "/viewconcern",
           element: <ViewConcern />
+        },
+        {
+          path: "/myconcern",
+          element: <MyConcern />
         },
         {
           path: "/mypatients",

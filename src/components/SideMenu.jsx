@@ -22,6 +22,11 @@ function SideMenu({handleSideMenu}) {
     navigate("/mypatients")
   } 
 
+  const navToMyConcerns = () =>{
+    handleSideMenu()
+    navigate("/myconcern")
+  } 
+
   const logOutUser = async () => {
     logout()
     navigate("/login")
@@ -29,7 +34,8 @@ function SideMenu({handleSideMenu}) {
 
   const addTab = () => {
     return userData.role_name == "Pharmacist" ? 
-    <button onClick={navToMyPatients} className='buttonIcon font-semibold'>My Patients</button> : null
+    <button onClick={navToMyPatients} className='buttonIcon font-semibold'>My Patients</button> :
+    <button onClick={navToMyConcerns} className='buttonIcon font-semibold'>My Concerns</button>
   }
 
   useEffect(() => {

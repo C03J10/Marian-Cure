@@ -77,6 +77,16 @@ export const getAllConcerns = async () => {
     return response
 }
 
+export const getAllConcernsOfPatient = async (user_id) => {
+    const response = await axios(`${url}concerns_of_patient/?user_id=${user_id}`)
+    return response
+}
+
+export const searchConcerns = async (name) => {
+    const response = await axios(`${url}search_concern/?name=${name}`)
+    return response
+}
+
 export const submitFeedback = async (feedback) => {
     let response;
     console.log(feedback)

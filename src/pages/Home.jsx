@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 
 import Footer from "components/Footer"
-import { getConcern } from 'server/fetch'
 
 import doctor from 'assets/doctor.png'
 import kit from 'assets/medkit.png'
@@ -17,7 +16,6 @@ function Home() {
 
   const navigate = useNavigate()
   const navToSubmitConcern = () => navigate("/submitconcern")
-  const navToViewConcern = () => navigate("/viewconcern")
   const navToMyPatients = () => navigate("/mypatients")
 
   let userData = JSON.parse(sessionStorage.getItem('user'))
@@ -26,15 +24,6 @@ function Home() {
     if (userData.role_name == "Pharmacist") {
       setUserState(3)
       return
-    }
-
-    const response = await getConcern(userData.user_id);
-
-    if (response.status === 200) {
-      sessionStorage.setItem('concern', JSON.stringify(response.data))
-      setUserState(2)
-      return
-
     } else {
       setUserState(1)
       return
@@ -49,11 +38,6 @@ function Home() {
       return
     }
 
-    if (userState == 2) {
-      setButtonText('View concern')
-      return
-    }
-
     if (userState == 3) {
       setButtonText('View patients')
       return
@@ -65,11 +49,6 @@ function Home() {
 
     if (userState == 1) {
       navToSubmitConcern()
-      return
-    }
-
-    if (userState == 2) {
-      navToViewConcern()
       return
     }
 
