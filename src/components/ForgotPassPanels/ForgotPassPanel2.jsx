@@ -7,9 +7,6 @@ import { updatePass } from 'server/fetch'
 
 function ForgotPassPanel2({ showToastVisibility }) {
 
-    const navigate = useNavigate();
-    const navToLogin = () => navigate('/login')
-
     const [password, setPassword] = useState('')
     const [confPassword, setConfPassword] = useState('')
 
@@ -39,7 +36,7 @@ function ForgotPassPanel2({ showToastVisibility }) {
 
             if (response.status === 200) {
 
-                navToLogin()
+                nextStep()
                 return
 
             }

@@ -20,6 +20,11 @@ function SideMenu({handleSideMenu}) {
   const navToMyPatients = () =>{
     handleSideMenu()
     navigate("/mypatients")
+  }
+  
+  const navToViewConcerns = () =>{
+    handleSideMenu()
+    navigate("/viewallconcerns")
   } 
 
   const navToMyConcerns = () =>{
@@ -34,7 +39,10 @@ function SideMenu({handleSideMenu}) {
 
   const addTab = () => {
     return userData.role_name == "Pharmacist" ? 
-    <button onClick={navToMyPatients} className='buttonIcon font-semibold'>My Patients</button> :
+    <>
+    <button onClick={navToViewConcerns} className='buttonIcon font-semibold'>View Concerns</button>
+    <button onClick={navToMyPatients} className='buttonIcon font-semibold'>My Patients</button>
+    </>:
     <button onClick={navToMyConcerns} className='buttonIcon font-semibold'>My Concerns</button>
   }
 

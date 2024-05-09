@@ -11,12 +11,12 @@ import Reportform from "pages/Reportform"
 import SubmitFeedback from "pages/SubmitFeedback"
 import MyConcern from "pages/MyConcern"
 
-
 import RegisterProvider from 'hooks/registerContext'
 import ForgotPassProvider from "hooks/forgotPassContext"
 
 const Home = lazy(() => import('pages/Home'))
 const MyPatients = lazy(() => import("pages/MyPatients"))
+const ViewAllConcerns = lazy(() => import("pages/ViewAllConcerns"))
 const ViewConcern = lazy(() => import("pages/ViewConcern"))
 
 function routers() {
@@ -62,6 +62,10 @@ function routers() {
         {
           path: "/viewconcern",
           element: <ViewConcern />
+        },
+        {
+          path:"/viewallconcerns",
+          element: <ViewAllConcerns/>
         },
         {
           path: "/myconcern",

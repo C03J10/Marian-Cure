@@ -4,6 +4,7 @@ import 'primeicons/primeicons.css'
 
 import ForgotPassPanel1 from 'components/ForgotPassPanels/ForgotPassPanel1'
 import ForgotPassPanel2 from 'components/ForgotPassPanels/ForgotPassPanel2'
+import ForgotPassPanel3 from 'components/ForgotPassPanels/ForgotPassPanel3'
 import Toast from 'components/Toast'
 
 import { ForgotPassContext } from 'hooks/forgotPassContext'
@@ -33,7 +34,9 @@ function ForgotPassword() {
       case 1:
         return <ForgotPassPanel1 showToastVisibility={showToastVisibility} />
       case 2:
-        return <ForgotPassPanel2 showToastVisibility={showToastVisibility}/>
+        return <ForgotPassPanel2 showToastVisibility={showToastVisibility} />
+      case 3:
+        return <ForgotPassPanel3 />
     }
   }
 
@@ -45,11 +48,19 @@ function ForgotPassword() {
 
       <div className='h-full w-3/5 flex flex-col'>
 
-        <button onClick={navToLogin} className='text-[1rem] buttonIcon pi pi-arrow-left mr-auto'></button>
+        {
+          step != 3 &&
+          <div>
 
-        <h1 className='text-left text-[3rem] font-bold'>
-          Forgot Password
-        </h1>
+            <button onClick={navToLogin} className='text-[1rem] buttonIcon pi pi-arrow-left mr-auto'></button>
+
+            <h1 className='text-left text-[3rem] font-bold'>
+              Forgot Password
+            </h1>
+
+          </div>
+        }
+
 
         <div className='font-semibold w-full'>
 

@@ -18,20 +18,23 @@ body {
 }
 
 textarea,
-input {
+input,
+select {
   @apply border;
   @apply border-blu-900;
   @apply bg-white;
 }
 
 textarea:active,
-input:active{
+input:active,
+select:active{
   @apply outline;
   @apply outline-blu-700;
 }
 
 textarea:focus,
-input:focus{
+input:focus,
+select:focus,{
   @apply outline;
   @apply outline-blu-700;
 }
@@ -41,6 +44,21 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-blu-300;
+    @apply rounded-sm;
+}
+ 
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-blu-500;
+}
+
 
 .buttonMain {
   @apply bg-blu-600;

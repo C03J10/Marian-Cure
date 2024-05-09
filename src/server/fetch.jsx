@@ -82,6 +82,11 @@ export const getAllConcernsOfPatient = async (user_id) => {
     return response
 }
 
+export const getAllConcernsOfPharmacist = async (user_id) => {
+    const response = await axios(`${url}concerns_by_pharmacist/?user_id=${user_id}`)
+    return response
+}
+
 export const searchConcerns = async (name) => {
     const response = await axios(`${url}search_concern/?name=${name}`)
     return response
@@ -89,10 +94,18 @@ export const searchConcerns = async (name) => {
 
 export const submitFeedback = async (feedback) => {
     let response;
-    console.log(feedback)
     try {
         response = await axios.post(`${url}add_feedback`, feedback )
-        console.log(response.data)
+    } catch (error) {
+        return false
+    }
+    return response
+}
+
+export const getNotifications = async (user_id) => {
+    let response;
+    try {
+        response = await axios(`${url}notifications/?user_id=${user_id}`)
     } catch (error) {
         return false
     }

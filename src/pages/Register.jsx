@@ -5,6 +5,7 @@ import 'primeicons/primeicons.css'
 import RegisterPanel1 from 'components/RegisterPanels/RegisterPanel1'
 import RegisterPanel2 from 'components/RegisterPanels/RegisterPanel2'
 import RegisterPanel3 from 'components/RegisterPanels/RegisterPanel3'
+import RegisterPanel4 from 'components/RegisterPanels/RegisterPanel4'
 import Toast from 'components/Toast'
 
 import { RegisterContext } from 'hooks/registerContext'
@@ -38,6 +39,8 @@ function Register() {
                 return <RegisterPanel2 />
             case 3:
                 return <RegisterPanel3 showToastVisibility={showToastVisibility} />
+            case 4:
+                return <RegisterPanel4 />
         }
     };
 
@@ -49,11 +52,15 @@ function Register() {
 
             <div className='h-full w-3/5 flex flex-col'>
 
-                <button onClick={navToLogin} className='text-[1rem] buttonIcon pi pi-arrow-left mr-auto'></button>
+                { step != 4 &&
+                    <div>
+                        <button onClick={navToLogin} className='text-[1rem] buttonIcon pi pi-arrow-left mr-auto'></button>
 
-                <h1 className='text-left text-[3rem] font-bold'>
-                    Sign Up
-                </h1>
+                        <h1 className='text-left text-[3rem] font-bold'>
+                            Sign Up
+                        </h1>
+                    </div>
+                }
 
                 <div className='font-semibold w-full'>
 

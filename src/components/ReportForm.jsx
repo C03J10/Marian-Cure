@@ -87,7 +87,7 @@ function ReportForm({ state }) {
             setAssessment(concernData.assessment_content)
             setPlan(concernData.plan_content)
             setDateFeedback(formatDate(concernData.date_assessment_submitted))
-            setPharmacist(concernData.full_name)
+            setPharmacist(concernData.pharmacist_full_name)
         }
 
     }
@@ -129,7 +129,7 @@ function ReportForm({ state }) {
         try {
 
             if (fullName === '' || gender === '' || age === '' || contactNumber === '' || weight === '' || height === '' ||
-                chiefComplaint === '' || familyHistory === '' || allergyHistory === '' ||patientHistory === '' || curMed === '') {
+                chiefComplaint === '' || familyHistory === '' || allergyHistory === '' || patientHistory === '' || curMed === '') {
                 showToastVisibility('Error', 'Please fill out the fields first.')
                 return
             }
@@ -184,7 +184,7 @@ function ReportForm({ state }) {
 
         try {
 
-            if (assessment === "" || plan === ""  ) {
+            if (assessment === "" || plan === "") {
                 showToastVisibility('Error', 'Please fill out the fields first.')
                 return
             }
@@ -215,6 +215,10 @@ function ReportForm({ state }) {
         }
     }
 
+    const handleGenderChange = (event) => {
+        setGender(event.target.value);
+    };
+
     const handlePregnantCheck = () => {
         setIsPregnant(!isPregnant)
     }
@@ -236,6 +240,7 @@ function ReportForm({ state }) {
 
         if (state == "submit") {
             setForView(false)
+            setFullName(userData.full_name)
             setHasFeedback(false)
             setFormTitle("Patient Details")
             return
@@ -243,7 +248,7 @@ function ReportForm({ state }) {
         if (state == "view") {
             setForView(true)
             setForFeedbackView(true)
-            
+
             if (concernData.assessment_id != null) {
                 setHasFeedback(true)
                 setHasPharmacist(true)
@@ -256,7 +261,7 @@ function ReportForm({ state }) {
 
             addData()
             return
-            
+
         }
         if (state == "feedback") {
             setForView(true)
@@ -267,7 +272,7 @@ function ReportForm({ state }) {
             return
         }
 
-})
+    })
 
     return (
 
@@ -302,15 +307,29 @@ function ReportForm({ state }) {
                         <div className='flex flex-row gap-7'>
 
                             <div className='w-1/2 flex flex-col'>
-                                <label htmlFor="fullNameInput" className='font-semibold'>Full Name (Ex. Dela Cruz, Juan C.)</label>
+                                <label htmlFor="fullNameInput" className='font-semibold'>Full Name</label>
                                 <input type="text" id='fullNameInput' placeholder='Enter Your Full Name' disabled={forView} value={fullName} onChange={(e) => setFullName(e.target.value)}
                                     className='h-12 rounded-lg w-full px-4' />
                             </div>
 
                             <div className='w-1/4 flex flex-col'>
-                                <label htmlFor="genderInput" className='font-semibold'>Gender</label>
-                                <input type="text" id='genderInput' placeholder='Gender' disabled={forView} value={gender} onChange={(e) => setGender(e.target.value)}
-                                    className='h-12 rounded-lg w-full px-4' />
+
+                                {
+                                    state == "submit" ?
+                                        <>
+                                            <label htmlFor="genderInput" className='font-semibold'>Gender</label>
+                                            <select name="gender" id="genderInput" onChange={handleGenderChange} className='h-12 rounded-lg w-full px-4'>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </> :
+                                        <>
+                                            <label htmlFor="genderInput" className='font-semibold'>Gender</label>
+                                            <input type="text" id='genderInput' placeholder='Gender' disabled={forView} value={gender} onChange={(e) => setGender(e.target.value)}
+                                                className='h-12 rounded-lg w-full px-4' />
+                                        </>
+                                }
+
                             </div>
 
                             <div className='w-1/4 flex flex-col'>

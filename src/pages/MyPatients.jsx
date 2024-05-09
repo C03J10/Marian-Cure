@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getAllConcerns, getConcernByID, searchConcerns } from 'server/fetch'
+import { getAllConcernsOfPharmacist, getConcernByID, searchConcerns } from 'server/fetch'
 import DataTable from 'react-data-table-component'
 
 import LoadingScreen from 'components/LoadingScreen '
@@ -66,7 +66,7 @@ function MyPatients() {
   const getConcerns = async () => {
 
     setLoading(true)
-    const response = await getAllConcerns()
+    const response = await getAllConcernsOfPharmacist(userData.user_id)
     setConcerns(response.data)
     setLoading(false)
   }
@@ -99,7 +99,7 @@ function MyPatients() {
 
         <div className='min-h-4/5 w-4/5 flex flex-col bg-white text-black p-12 rounded-xl my-12 gap-6'>
 
-          <h1 className='text-center text-[1.5rem] font-bold items-center w-full '>Medical Reports</h1>
+          <h1 className='text-center text-[1.5rem] font-bold items-center w-full '>My Patients</h1>
 
           <div className="w-full h-12 relative rounded-2xl">
 

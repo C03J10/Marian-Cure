@@ -16,7 +16,7 @@ function RegisterPanel3({ showToastVisibility }) {
     const [disable, setDisable] = useState(false)
     const [buttonText, setButtonText] = useState('Submit')
 
-    const { userData, setUserData, prevStep } = useContext(RegisterContext)
+    const { userData, setUserData, prevStep, nextStep } = useContext(RegisterContext)
 
     const register = async () => {
 
@@ -47,7 +47,7 @@ function RegisterPanel3({ showToastVisibility }) {
 
             if (response.status === 200) {
 
-                navToLogin()
+                nextStep()
                 return
 
             }

@@ -3,14 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import 'primeicons/primeicons.css'
 
 import SideMenu from 'components/SideMenu'
+import NotificationMenu from 'components/NotificationMenu'
 import mariancure from 'assets/Logo/mariancure.png'
 
 function Navbar() {
 
   const [seeSideMenu, setSeeSideMenu] = useState(false)
+  const [seeNotificationMenu, setSeeNotificationMenu] = useState(false)
 
   const handleSideMenu = () => {
     setSeeSideMenu(!seeSideMenu)
+  }
+
+  const handleNotificationMenu = () => {
+    setSeeNotificationMenu(!seeNotificationMenu)
   }
 
   return (
@@ -27,9 +33,12 @@ function Navbar() {
           </span>
         </div>
 
-        {seeSideMenu && <SideMenu handleSideMenu={handleSideMenu}/>}
+        {seeSideMenu && <SideMenu handleSideMenu={handleSideMenu} />}
+        {seeNotificationMenu && <NotificationMenu/>}
 
         <div className=' flex flex-row float-right mr-0 m-auto text-[1.5rem] gap-7'>
+
+          <button onClick={handleNotificationMenu} className='pi pi-bell buttonIcon'></button>
 
           <button onClick={handleSideMenu} className='pi pi-align-right buttonIcon'></button>
 
