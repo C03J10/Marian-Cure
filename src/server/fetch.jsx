@@ -47,6 +47,18 @@ export const getEmailAddress = async(email) =>{
     return response
 }
 
+export const getUsername = async(username) =>{
+    let response;
+
+    try{
+        response = await axios(`${url}get_username?username=${username}`)
+    }catch (error){
+        return false
+    }
+
+    return response
+}
+
 export const getConcern = async (user_id) => {
     let response;
     try {

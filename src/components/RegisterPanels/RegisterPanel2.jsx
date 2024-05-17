@@ -1,28 +1,56 @@
 import React, { useEffect, useState, useContext } from 'react'
 
 import { RegisterContext } from 'hooks/registerContext'
+import { getUsername, getEmailAddress } from 'server/fetch'
 
-function RegisterPanel2() {
+function RegisterPanel2({ showToastVisibility }) {
 
     const [fullName, setFullName] = useState('')
     const [username, setUsername] = useState('')
     const [emailAddress, setEmailAddress] = useState('')
 
     const [disable, setDisable] = useState(false)
+    const [buttonText, setButtonText] = useState('Next')
 
     const { userData, setUserData, prevStep, nextStep } = useContext(RegisterContext)
 
-    const nextStep2 = () => {
+    const nextStep2 = async () => {
 
-        setUserData((userData) => (
-            {
-                ...userData,
-                full_name: fullName,
-                username: username,
-                email_address: emailAddress
+        setDisable(true)
+        setButtonText(<i className='pi pi-spinner pi-spin'></i>)
+
+        try {
+
+            const response = await getUsername(username)
+
+            if (response) {
+                showToastVisibility('Error', 'Username already been used.')
+                return
             }
-        ))
-        nextStep()
+
+            const response2 = await getEmailAddress(emailAddress)
+
+            if (response2) {
+                showToastVisibility('Error', 'Email Address already been used.')
+                return
+            }
+
+            setUserData((userData) => (
+                {
+                    ...userData,
+                    full_name: fullName,
+                    username: username,
+                    email_address: emailAddress
+                }
+            ))
+
+            nextStep()
+
+        } finally {
+            setDisable(false)
+            setButtonText('Next')
+        }
+
     }
 
     useEffect(() => {
@@ -67,7 +95,7 @@ function RegisterPanel2() {
 
                 <button id="nextButton" onClick={nextStep2} disabled={disable}
                     className='h-12 w-36 buttonMain text-white mb-4 rounded-lg float-right ml-auto'>
-                    Next</button>
+                    {buttonText}</button>
 
             </div>
 

@@ -9,12 +9,13 @@ function ReportForm({ state }) {
 
     const [forView, setForView] = useState(true)
     const [forFeedbackView, setForFeedbackView] = useState(true)
+    const [handleGender, setHandleGender] = useState(true)
     const [hasFeedback, setHasFeedback] = useState(false)
     const [hasPharmacist, setHasPharmacist] = useState(false)
     const [formTitle, setFormTitle] = useState(false)
 
     const [fullName, setFullName] = useState('')
-    const [gender, setGender] = useState('')
+    const [gender, setGender] = useState('Male')
     const [age, setAge] = useState('')
     const [contactNumber, setContactNumber] = useState('')
     const [weight, setWeight] = useState('')
@@ -217,6 +218,16 @@ function ReportForm({ state }) {
 
     const handleGenderChange = (event) => {
         setGender(event.target.value);
+
+        const genderValue = event.target.value
+ 
+        if (genderValue === 'Male'){
+            setHandleGender(true)
+            setIsPregnant(false)
+            setDoesBreastfeed(false)
+        } else {
+            setHandleGender(false)
+        }
     };
 
     const handlePregnantCheck = () => {
@@ -243,11 +254,17 @@ function ReportForm({ state }) {
             setFullName(userData.full_name)
             setHasFeedback(false)
             setFormTitle("Patient Details")
+
+            if (gender === 'Male'){
+                setHandleGender(true)
+            }
+
             return
         }
         if (state == "view") {
             setForView(true)
             setForFeedbackView(true)
+            setHandleGender(true)
 
             if (concernData.assessment_id != null) {
                 setHasFeedback(true)
@@ -267,6 +284,7 @@ function ReportForm({ state }) {
             setForView(true)
             setHasFeedback(true)
             setForFeedbackView(false)
+            setHandleGender(true)
             setFormTitle("Medical Report Form")
             addData()
             return
@@ -344,7 +362,7 @@ function ReportForm({ state }) {
 
                             <div className='w-1/2 flex flex-col'>
                                 <label htmlFor="contactNumberInput" className='font-semibold'>Contact Number</label>
-                                <input type="text" id='contactNumberInput' placeholder='09XXXXXXXXX' disabled={forView} value={contactNumber} onChange={(e) => setContactNumber(e.target.value)}
+                                <input type="number" min="0" id='contactNumberInput' placeholder='09XXXXXXXXX' disabled={forView} value={contactNumber} onChange={(e) => setContactNumber(e.target.value)}
                                     className='h-12 rounded-lg w-full px-4' />
                             </div>
 
@@ -370,12 +388,12 @@ function ReportForm({ state }) {
                         <div className='flex flex-row items-center justify-center gap-9 '>
 
                             <div className='flex gap-3'>
-                                <input type="checkbox" id='pregnantInput' disabled={forView} value={isPregnant} checked={isPregnant} onChange={handlePregnantCheck} />
+                                <input type="checkbox" id='pregnantInput' disabled={handleGender} value={isPregnant} checked={isPregnant} onChange={handlePregnantCheck} />
                                 <label htmlFor='pregnantInput'>Pregnant</label>
                             </div>
 
                             <div className='flex gap-3'>
-                                <input type="checkbox" id='breastfeedingInput' disabled={forView} value={doesBreastfeed} checked={doesBreastfeed} onChange={handleBreastfeedCheck} />
+                                <input type="checkbox" id='breastfeedingInput' disabled={handleGender} value={doesBreastfeed} checked={doesBreastfeed} onChange={handleBreastfeedCheck} />
                                 <label htmlFor='breastfeedingInput'>Breastfeeding</label>
                             </div>
 

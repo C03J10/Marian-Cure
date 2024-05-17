@@ -17,14 +17,14 @@ function ForgotPassPanel2({ showToastVisibility }) {
 
     const update = async () => {
 
-        setDisable(true)
-        setButtonText(<i className='pi pi-spinner pi-spin'></i>)
-
         if (password != confPassword) {
             showToastVisibility('Error', "Passwords don't match.")
             return
         }
 
+        setDisable(true)
+        setButtonText(<i className='pi pi-spinner pi-spin'></i>)
+        
         try {
 
             const response = await updatePass(userData.email_address, password)

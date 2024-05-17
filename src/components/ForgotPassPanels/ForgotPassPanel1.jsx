@@ -23,7 +23,7 @@ function ForgotPassPanel1({ showToastVisibility }) {
             const response = await getEmailAddress(emailAddress)
 
             if (!response) {
-                showToastVisibility('Error', 'Something went wrong. Please try again.')
+                showToastVisibility('Error', 'Email Adress does not exist.')
                 return
             }
 
